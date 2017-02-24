@@ -312,7 +312,14 @@ El tren número 8 no esta funcionando
 **3 -** Imprimimos por consola el estado de cada tren en movimiento de manera individualizada...  usando *for*.
 
 ```javascript
-  // Tu solución
+    var trenesOperativos = 3;
+    var totalTrenes = 8;
+
+    function estadoDetalle () {
+    	for(var numeroTren = 1; numeroTren <= totalTrenes; numeroTren++) {
+    		console.log("El tren " + numeroTren + " esta " + (numeroTren <= trenesOperativos ? "funcionando" : "parado"));	
+    	};
+    };
 ```
 
 
