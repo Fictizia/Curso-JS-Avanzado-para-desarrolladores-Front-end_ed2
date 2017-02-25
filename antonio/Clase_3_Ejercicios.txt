@@ -1,0 +1,108 @@
+var trenes = [];
+var estado = [];
+var servicio = [];
+
+trenes = [1,2,3,4,5,6,7,8,9,10];
+estado = [1,1,1,0,0,0,0,0,0,0];
+servicio[9] = "Nocturno";
+
+//*1,2,3,4
+//VER TRENES Y SU ESTADO
+//FOR i
+function verTrenesForClassic() {
+
+    for(var i = 0; i < trenes.length; i++) {
+
+      if (trenes[i] === undefined) {
+
+        continue;
+
+      } else if (estado[i] === 1) {
+
+        console.log("For i > El tren número "+trenes[i]+(servicio[i] != undefined ? " ("+servicio[i]+") " : " ")+"está funcionando");
+
+      } else {
+
+        console.log("For i > El tren número "+trenes[i]+(servicio[i] != undefined ? " ("+servicio[i]+") " : " ")+"no está funcionando");
+
+      }
+
+    }
+
+}
+
+//For Each
+function verTrenesForEach() {
+
+    function tren(element,index,array) {
+
+      if (estado[index] === 1 && trenes[index] != undefined) {
+
+            console.log("For i > El tren número "+trenes[index]+(servicio[index] != undefined ? " ("+servicio[index]+") " : " ")+" está funcionando");
+
+      } else if (trenes[index] != undefined) {
+
+            console.log("For i > El tren número "+trenes[index]+(servicio[index] != undefined ? " ("+servicio[index]+") " : " ")+" no está funcionando");
+
+      }
+
+    }
+
+    trenes.forEach(tren);
+
+}
+//END VER TRENES Y SU ESTADO
+
+//*5
+//PONER TODOS TRENES EN MARCHA O PARAR
+var newEstado;
+
+function estadoTodosTrenes(newEstado) {
+
+  if(newEstado === 0) {
+
+    for(var i = 0; i < trenes.length; i++) {
+  
+       estado[i] = newEstado;
+  
+    }
+
+	console.log("Todos los trenes están parados");
+
+  } else if(newEstado === 1) {
+    	
+    for(var i = 0; i < trenes.length; i++) {
+  
+        estado[i] = newEstado;
+  
+    }
+
+	console.log("Todos los trenes están funcionando");
+    
+  } else {
+
+    //FOR i
+    verTrenesForClassic();
+    //FOR Each
+    //verTrenesForEach();
+
+  }
+
+}
+
+//END PONER TODOS TRENES EN MARCHA O PARAR
+
+//*6
+//CREAR NUEVO TREN EN Nº12 y Nocturno
+trenes[11] = 12;
+estado[11] = 1;
+servicio[11] = "Nocturno";
+
+//*7
+//CREAR NUEVO TREN EN Nº13 y Sabados
+trenes[12] = 13;
+estado[12] = 0;
+servicio[12] = "Solo funciona los Sábados";
+
+//VER ESTADO TRENES > Args > Si pasamos > 0 parar || 1 funcionando
+estadoTodosTrenes();
