@@ -1,0 +1,122 @@
+var train = {
+  	number : 0,
+    status : false,
+  	service : "Normal"
+};
+
+//F Start Service
+function startService(totalTrains) {
+
+  for(var i=1 ; i<=totalTrains ; i++) {
+  
+  	train.number = i;
+
+  	//Set Status
+  	if (train.number <= 8) {
+
+  		train.status = true;
+
+  	}
+
+  	//Train 10 Nocturno
+  	if (train.number === 10) {
+
+  		train.service = "Nocturno";
+
+  	}
+
+  	printStatus(train);
+  
+  }
+
+}
+
+//F Supuestos : Ejercicios
+//1-3* 8 trenes, 1-3 activos, No print service
+/*
+function printStatus(train) {
+
+  if(train.number <= 3 && train.status != false) {
+
+  	console.log("El tren numero "+train.number+" está funcionando.");
+
+  } else {
+
+  	console.log("El tren numero "+train.number+" no está funcionando.");
+
+  }
+
+}
+
+startService(8);
+//END 1-3*
+
+//4* 15 trenes, 1-8 activos, Print train 10 service "Nocturno"
+function printStatus(train) {
+
+  if(train.number <= 8 && train.status != false) {
+
+  	console.log("El tren numero "+train.number+" está funcionando.");
+
+  } else if (train.number === 10) {
+
+  	console.log("El tren numero "+train.number+" "+train.service+" no está funcionando.");
+
+  } else {
+
+  	console.log("El tren numero "+train.number+" no está funcionando.");
+
+  }
+
+}
+
+startService(15);
+//END 4*
+
+*/
+
+//5* 15 Trenes, 1-8 activos , Todos ON or Todos OFF
+
+function printStatus(train) {
+
+  if(train.number <= 8 && train.status != false) {
+    
+  	console.log("El tren numero "+train.number+" está funcionando.");
+    
+  } else if (train.number === 10) {
+
+  	console.log("El tren numero "+train.number+" "+train.service+" no está funcionando.");
+
+  } else {
+  
+  	console.log("El tren numero "+train.number+" no está funcionando.");
+    
+  }
+    
+}
+
+function switchAll(allEnginesStatus,totalTrains) {
+
+	if (allEnginesStatus === 0) {
+
+		//PARAR TODOS
+		console.log("Todos parados");
+		return; 
+
+	} else if (allEnginesStatus === 1) {
+
+		//ARRANCAR TODOS
+		console.log("Todos en marcha");
+		return;  
+
+	} else {startService(totalTrains);}
+
+}
+
+//Todos Apagados
+switchAll(0,15);
+//Todos Encendidos
+//switchAll(1,15)
+//Initial Status
+//switchAll(3,15)
+
