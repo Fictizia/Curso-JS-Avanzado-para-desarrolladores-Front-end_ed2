@@ -1,0 +1,34 @@
+//CAJERO
+var cajero = {
+	
+	empresa : "GrahoBank",
+	tipo : "Callejero",
+	dinero : number,
+	moneda: "€"
+
+};
+
+//Users > 2 tipos > Admin y Client
+var user = {
+
+	//nombre ID
+
+	//pass acceso
+
+	//tipo de user > admin o client
+
+	//dinero que tiene Cuenta >  solo si user.type = client
+
+	//metodo añadir dinero cajero >> añadir a cajero.dinero > solo si user.type = admin
+
+	//metodo retirar dinero cajero >> quitar de cajero.dinero > solo si user.type = admin
+
+	//metodo añadir clientes >> añadir a users > solo si user.type = admin
+
+	//metodo borrar clientes >> quitar a users > solo si user.type = admin
+
+	//metodo añadir dinero a cuenta >> añadir a user.cuenta > solo si user.type = client
+
+	//metodo retirar dinero de cuenta >> quitar a user.cuenta > solo si user.type = client
+
+};
