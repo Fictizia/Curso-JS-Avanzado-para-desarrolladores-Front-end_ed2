@@ -16,5 +16,5 @@
 
 //Otra alternativa sin declarar variable intermedia
 
-    constructorDeTickets ("Tetuán", 12)("Pepe")
+    constructorDeTickets ("Tetuán", 12)("Pepe");
 
