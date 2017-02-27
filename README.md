@@ -50,7 +50,7 @@ Teoría | Recursos
 [Clase 1](teoria/clase1.md)	| [Clase 1](recursos/clase1.md)
 [Clase 2](teoria/clase2.md) | [Clase 2](recursos/clase2.md)
 [Clase 3](teoria/clase3.md) | [Clase 3](recursos/clase3.md)
-Clase 4 | Clase 4
+[Clase 4](teoria/clase4.md) | Clase 4
 Clase 5 | Clase 5
 Clase 6 | Clase 6
 Clase 7 | Clase 7
