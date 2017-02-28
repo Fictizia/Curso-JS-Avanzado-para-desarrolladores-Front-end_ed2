@@ -6,7 +6,12 @@ var cajero = {
 	empresa : "GrahoBank",
 	tipo : "Callejero",
 	saldo : deposito,
-	moneda: "€"
+	moneda: "€",
+	
+	//IDEA 
+	//SUMAR Y RESTAR DINERO DEL CAJERO PODRIAN SER METODOS DEL CAJERO???
+	//SI lo llama user.admin opera solo sobre cajero.saldo
+	//SI lo llama user.client opera sobre cajero.saldo y cliente.saldo
 
 };
 
