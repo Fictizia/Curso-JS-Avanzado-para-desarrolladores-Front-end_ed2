@@ -5,94 +5,17 @@ var cajero = {
 	
 	empresa : "GrahoBank",
 	tipo : "Callejero",
-	saldoCajero : deposito,
+	saldo : deposito,
 	moneda: "€"
 
 };
 
-//Saldo Cajero Inicial
-//console.log(cajero.saldoCajero+cajero.moneda);
+//Saldo Cajero
+//console.log(cajero.saldo+cajero.moneda);
 
 //Users > 2 tipos > Admin y Client
 
-//Admin ingresa dinero
-function addMoney() {
-	
-	//if cantidad a ingresar > 0
-
-		//saldo cajero + cantidad a ingresar
-
-	//else > ERROR "Cantidad Introducida <= 0"
-
-}
-
-//Admin retira dinero
-function getMoney() {
-	
-	//if cantidad a retirar > 0
-
-		//saldo cajero - cantidad a retirar
-
-			//if (saldoCajero < 0) > ERROR
-
-	//else > ERROR "Cantidad Introducida <= 0"
-
-}
-
-//Admin añade cliente
-function addClient(clientID,clientPass) {
-
-	//Existe esa ID?
-
-		//NO > Go > Crear nuevo Cliente
-
-			//Saldo inicial de ese cliente?
-
-		//YES > ERROR "Ese cliente ya tiene cuenta"
-	
-}
-
-//Admin quita cliente
-function deleteClient(clientID) {
-
-	//Existe esa ID?
-
-		//NO > ERROR "Ese cliente no existe"
-
-		//YES > Go > Delete cliente
-	
-}
-
-//Client ingresa dinero
-function addMoney() {
-	
-	//if cantidad a ingresar > 0
-
-		//saldo cliente + cantidad a ingresar
-
-		//saldo cajero + cantidad a ingresar
-
-	//else > ERROR "Cantidad Introducida <= 0"
-
-}
-
-//Cliente retira dinero
-function getMoney() {
-	
-	//if cantidad a retirar > 0
-
-		//saldo cliente - cantidad a retirar
-
-			//if (saldoCliente < 0) || (saldoCajero < 0) > ERROR
-
-		//saldo cajero - cantidad a retirar
-
-			//if (saldoCajero < 0) > ERROR
-
-	//else > ERROR "Cantidad Introducida <= 0"
-
-}
-
+//All Users
 var user = {
 
 	//nombre ID
@@ -101,18 +24,95 @@ var user = {
 
 	//tipo de user > admin o client
 
-	//dinero que tiene Cuenta >  solo si user.type = client
+}
 
-	//metodo añadir dinero cajero >> añadir a cajero.dinero > solo si user.type = admin
+//user.admin
+/*
+	permisos : admin,
 
-	//metodo retirar dinero cajero >> quitar de cajero.dinero > solo si user.type = admin
+	//Admin ingresa dinero
+	addMoney : function(cantidad a ingresar) {
+		
+		//if cantidad a ingresar > 0
 
-	//metodo añadir clientes >> añadir a users > solo si user.type = admin
+			//cajero.saldo + cantidad a ingresar
 
-	//metodo borrar clientes >> quitar a users > solo si user.type = admin
+		//else > ERROR "Cantidad Introducida <= 0"
 
-	//metodo añadir dinero a cuenta >> añadir a user.cuenta > solo si user.type = client
+	}
 
-	//metodo retirar dinero de cuenta >> quitar a user.cuenta > solo si user.type = client
+	//Admin retira dinero
+	getMoney : function(cantidad a retirar) {
+		
+		//if cantidad a retirar > 0
 
-};
+			//cajero.saldo - cantidad a retirar
+
+				//if (saldoCajero < 0) > ERROR
+
+		//else > ERROR "Cantidad Introducida <= 0"
+
+	}
+
+	//Admin añade cliente
+	addClient : function(clientID,clientPass) {
+
+		//Existe esa ID?
+
+			//NO > Go > Crear nuevo Cliente
+
+				//cliente.saldo inicial de ese cliente?
+
+			//YES > ERROR "Ese cliente ya tiene cuenta"
+		
+	}
+
+	//Admin quita cliente
+	deleteClient : function(clientID) {
+
+		//Existe esa ID?
+
+			//NO > ERROR "Ese cliente no existe"
+
+			//YES > Go > Delete cliente
+		
+	}
+*/
+
+//user.client
+/*
+
+	permisos : cliente,
+
+	saldo : dinero que tiene el cliente,
+
+	//Client ingresa dinero
+	addMoney : function(cantidad a ingresar) {
+		
+		//if cantidad a ingresar > 0
+
+			//cliente.saldo + cantidad a ingresar
+			//cajero.saldo + cantidad a ingresar
+
+		//else > ERROR "Cantidad Introducida <= 0"
+
+	}
+
+	//Cliente retira dinero
+	getMoney : function(cantidad a retirar) {
+		
+		//if cantidad a retirar > 0
+
+			//cliente.saldo - cantidad a retirar
+
+				//if (cliente.saldo < 0) || (cajero.saldo < 0) > ERROR
+
+			//cajero.saldo - cantidad a retirar
+
+				//if (cajero.saldo < 0) > ERROR
+
+		//else > ERROR "Cantidad Introducida <= 0"
+
+	}
+
+*/
