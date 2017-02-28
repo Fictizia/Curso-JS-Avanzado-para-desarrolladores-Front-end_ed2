@@ -1,14 +1,98 @@
 //CAJERO
+var deposito = 10000;
+
 var cajero = {
 	
 	empresa : "GrahoBank",
 	tipo : "Callejero",
-	dinero : number,
+	saldoCajero : deposito,
 	moneda: "€"
 
 };
 
+//Saldo Cajero Inicial
+//console.log(cajero.saldoCajero+cajero.moneda);
+
 //Users > 2 tipos > Admin y Client
+
+//Admin ingresa dinero
+function addMoney() {
+	
+	//if cantidad a ingresar > 0
+
+		//saldo cajero + cantidad a ingresar
+
+	//else > ERROR "Cantidad Introducida <= 0"
+
+}
+
+//Admin retira dinero
+function getMoney() {
+	
+	//if cantidad a retirar > 0
+
+		//saldo cajero - cantidad a retirar
+
+			//if (saldoCajero < 0) > ERROR
+
+	//else > ERROR "Cantidad Introducida <= 0"
+
+}
+
+//Admin añade cliente
+function addClient(clientID,clientPass) {
+
+	//Existe esa ID?
+
+		//NO > Go > Crear nuevo Cliente
+
+			//Saldo inicial de ese cliente?
+
+		//YES > ERROR "Ese cliente ya tiene cuenta"
+	
+}
+
+//Admin quita cliente
+function deleteClient(clientID) {
+
+	//Existe esa ID?
+
+		//NO > ERROR "Ese cliente no existe"
+
+		//YES > Go > Delete cliente
+	
+}
+
+//Client ingresa dinero
+function addMoney() {
+	
+	//if cantidad a ingresar > 0
+
+		//saldo cliente + cantidad a ingresar
+
+		//saldo cajero + cantidad a ingresar
+
+	//else > ERROR "Cantidad Introducida <= 0"
+
+}
+
+//Cliente retira dinero
+function getMoney() {
+	
+	//if cantidad a retirar > 0
+
+		//saldo cliente - cantidad a retirar
+
+			//if (saldoCliente < 0) || (saldoCajero < 0) > ERROR
+
+		//saldo cajero - cantidad a retirar
+
+			//if (saldoCajero < 0) > ERROR
+
+	//else > ERROR "Cantidad Introducida <= 0"
+
+}
+
 var user = {
 
 	//nombre ID
