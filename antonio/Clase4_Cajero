@@ -47,7 +47,7 @@ var cajero = {
 
 	            //EXITO
 	            cajero.saldo += cantidad;
-	            client[0].saldo += cantidad;
+	            client[cajero.clientID].saldo += cantidad;
 	            console.info("YEAH! Querido cliente "+client[cajero.clientID].nombre+" de "+cajero.empresa+" su saldo ahora es de "+client[cajero.clientID].saldo+cajero.moneda);
 	        }
           
