@@ -7,11 +7,52 @@ var cajero = {
 	tipo : "Callejero",
 	saldo : deposito,
 	moneda: "€",
-	
-	//IDEA 
-	//SUMAR Y RESTAR DINERO DEL CAJERO PODRIAN SER METODOS DEL CAJERO???
-	//SI lo llama user.admin opera solo sobre cajero.saldo
-	//SI lo llama user.client opera sobre cajero.saldo y cliente.saldo
+
+	addMoney : function(cantidad a ingresar,user) {
+		
+		//if cantidad a ingresar > 0
+			//&& user.admin
+			
+				//cajero.saldo + cantidad a ingresar
+
+			//&& user.cliente		
+
+				//cliente.saldo + cantidad a ingresar
+				//cajero.saldo + cantidad a ingresar
+
+		//else > ERROR "Cantidad a ingresar <= 0"
+
+	}
+
+	getMoney : function(cantidad a retirar,user) {
+		
+		//if cantidad a retirar > 0
+
+			//&& user = admin
+
+				//cajero.saldo - cantidad a retirar
+
+					//if (saldoCajero < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+
+			//&& user = cliente
+
+				//cliente.saldo - cantidad a retirar
+
+					//if (cajero.saldo < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+
+					//else if (cliente.saldo < 0) > ERROR "Cliente no tiene saldo suficiente"
+
+					//ELSE > Exito > Print cliente.saldo
+
+				//cajero.saldo - cantidad a retirar
+
+					//if (cajero.saldo < 0) > ERROR
+
+					//ELSE > Exito > Print cajero.saldo
+
+		//else > ERROR "Cantidad a retirar <= 0"
+
+	}
 
 };
 
@@ -34,30 +75,6 @@ var user = {
 //user.admin
 /*
 	permisos : admin,
-
-	//Admin ingresa dinero
-	addMoney : function(cantidad a ingresar) {
-		
-		//if cantidad a ingresar > 0
-
-			//cajero.saldo + cantidad a ingresar
-
-		//else > ERROR "Cantidad Introducida <= 0"
-
-	}
-
-	//Admin retira dinero
-	getMoney : function(cantidad a retirar) {
-		
-		//if cantidad a retirar > 0
-
-			//cajero.saldo - cantidad a retirar
-
-				//if (saldoCajero < 0) > ERROR
-
-		//else > ERROR "Cantidad Introducida <= 0"
-
-	}
 
 	//Admin añade cliente
 	addClient : function(clientID,clientPass) {
@@ -88,36 +105,7 @@ var user = {
 /*
 
 	permisos : cliente,
+	saldo : dinero que tiene el cliente
 
-	saldo : dinero que tiene el cliente,
-
-	//Client ingresa dinero
-	addMoney : function(cantidad a ingresar) {
-		
-		//if cantidad a ingresar > 0
-
-			//cliente.saldo + cantidad a ingresar
-			//cajero.saldo + cantidad a ingresar
-
-		//else > ERROR "Cantidad Introducida <= 0"
-
-	}
-
-	//Cliente retira dinero
-	getMoney : function(cantidad a retirar) {
-		
-		//if cantidad a retirar > 0
-
-			//cliente.saldo - cantidad a retirar
-
-				//if (cliente.saldo < 0) || (cajero.saldo < 0) > ERROR
-
-			//cajero.saldo - cantidad a retirar
-
-				//if (cajero.saldo < 0) > ERROR
-
-		//else > ERROR "Cantidad Introducida <= 0"
-
-	}
 
 */
