@@ -10,6 +10,7 @@ var cajero={
 entidad:"BBVA",
 id:"1234",
 moneda:"euros",
+saldo:1000,
 ingresoCliente:function(dinero,numCuenta){
 						cuentas[numCuenta]=cuentas[numCuenta]+dinero;
 						cajero.saldo=cajero.saldo+dinero;
@@ -20,17 +21,16 @@ ingresoCajero:function(dinero){
 retiradaCliente:function(dinero,numCuenta){
 						cuentas[numCuenta]=cuentas[numCuenta]-dinero;
 						cajero.saldo=cajero.saldo-dinero;
-					},
+					}
 
-saldo:1000
+
 
 
 
 }
 
-
-cajero.ingresoCliente(50,"abcd1234");
-cajero.retiradaCliente(50,"cafe4567");
+console.log(cajero.ingresoCliente(50,"abcd1234"));
+cajero.retiradaCliente(150,"cafe4567");
 
 
 console.log("Saldo Cajero: "+cajero.saldo);
