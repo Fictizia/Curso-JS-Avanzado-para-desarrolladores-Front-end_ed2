@@ -68,22 +68,31 @@ var user = {
 
 	//pass acceso
 
-	//tipo de user > admin o client
+	//tipos de user admin o client
+	permisos : admin o client,
+
+	addMoney : cajero.addMoney(id,pass,cantidad);
+	getMoney : cajero.getMoney(id,pass,cantidad);
 
 }
 
 //user.admin
 /*
-	permisos : admin,
 
 	//Admin añade cliente
-	addClient : function(clientID,clientPass) {
+	addClient : function(clientNewID,clientNewPass,clienteNewSaldo) {
 
 		//Existe esa ID?
 
 			//NO > Go > Crear nuevo Cliente
 
-				//cliente.saldo inicial de ese cliente?
+				//IF clienteNewSaldo = undefined 
+
+					cliente.saldo = 0;
+
+				//ELSE
+
+					cliente.saldo = clienteNewSaldo;
 
 			//YES > ERROR "Ese cliente ya tiene cuenta"
 		
@@ -103,9 +112,5 @@ var user = {
 
 //user.client
 /*
-
-	permisos : cliente,
 	saldo : dinero que tiene el cliente
-
-
 */
