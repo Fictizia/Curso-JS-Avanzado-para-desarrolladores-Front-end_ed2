@@ -1,3 +1,62 @@
+/* START EJERCICIO */
+//CAJERO
+var deposito = 10000;
+
+var cajero = {
+	
+	empresa : "GrahoBank",
+	saldo : deposito,
+	moneda: "€",
+
+	checkUser : function(who) {
+		
+		if(who === "Admin") {
+
+			console.log(who);
+
+		} else if (who === "Client") {
+
+			console.log(who);
+
+		}
+		
+	}
+
+}
+
+var admin = {
+
+	id : "Admin",
+
+	addMoney : function() {
+
+		cajero.checkUser(admin.id);
+
+	}
+
+}
+
+//Admin callin
+//admin.addMoney(admin.id);
+
+var client = {
+
+	id : "Client",
+	saldo : 1000,
+
+	addMoney : function() {
+
+		cajero.checkUser(client.id);
+
+	}
+
+}
+
+//Client callin
+//client.addMoney(client.id);
+/* END EJERCICIO */
+
+/* PLANTEAMIENTO */
 //CAJERO
 var deposito = 10000;
 
