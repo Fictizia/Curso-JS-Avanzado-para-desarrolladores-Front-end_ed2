@@ -1,4 +1,4 @@
-/* START EJERCICIO */
+/* ========================================== START EJERCICIO ========================================== */
 //CAJERO
 var deposito = 10000;
 
@@ -6,55 +6,112 @@ var cajero = {
 	
 	empresa : "GrahoBank",
 	saldo : deposito,
+	user : undefined,
 	moneda: "€",
 
-	checkUser : function(who) {
+	login : function(who) {
 		
-		if(who === "Admin") {
+		if(who === "Admin" || who === "Client") {
 
-			console.log(who);
+			cajero.user = who;
+			console.log("Logueado como "+cajero.user);
 
-		} else if (who === "Client") {
+		} else {
 
-			console.log(who);
+			//ERROR
+			console.error("Login fallido");
 
 		}
 		
+	},
+
+	addMoney : function(cantidad) {
+
+		if (cantidad > 0) {
+					
+					if (cajero.user === "Admin") {
+
+	            //EXITO
+	            cajero.saldo += cantidad;
+	            console.info("YEAH! El cajero ahora tiene "+cajero.saldo+cajero.moneda);
+
+	        } else {
+
+	            //EXITO
+	            cajero.saldo += cantidad;
+	            client.saldo += cantidad;
+	            console.info("YEAH! Querido cliente de "+cajero.empresa+" su saldo ahora es de "+client.saldo+cajero.moneda);
+	        }
+          
+
+		} else {
+
+			//ERROR
+			console.error("Por favor, introduzca una cantidad correcta.");
+
+		}
+
+	},
+
+	getMoney : function(cantidad) {
+
+		var controlSaldo = cajero.saldo - cantidad;
+
+		if (cantidad > 0 && controlSaldo >= 0) {
+
+			if (cajero.user === "Admin") {
+
+	            //EXITO
+	            cajero.saldo -= cantidad;
+	            console.info("YEAH! El cajero ahora tiene "+cajero.saldo+cajero.moneda);
+
+	        } else if ((client.saldo -= cantidad) >= 0) {
+
+	            //EXITO
+	            cajero.saldo -= cantidad;
+	            console.info("YEAH! Querido cliente de "+cajero.empresa+" su saldo ahora es de "+client.saldo+cajero.moneda);
+
+	        } else {
+
+	        	//ERROR
+				console.error("Estimado cliente, no dispone de saldo suficiente en su cuenta.");
+
+	        }
+
+		} else {
+
+			//ERROR
+			console.error("Por favor, introduzca una cantidad correcta.");
+
+		}
+
 	}
 
-}
+};
 
 var admin = {
 
 	id : "Admin",
 
-	addMoney : function() {
-
-		cajero.checkUser(admin.id);
-
-	}
-
-}
-
-//Admin callin
-//admin.addMoney(admin.id);
+};
 
 var client = {
 
 	id : "Client",
 	saldo : 1000,
 
-	addMoney : function() {
+};
 
-		cajero.checkUser(client.id);
+//1 * Admin o Client login > Exito > admin.id o client.id
+cajero.login(client.id);
 
-	}
+//2 * Admin o Client suman dinero al cajero
+//cajero.addMoney(500);
 
-}
+//3 * Admin o Client restan dinero al cajero
+//cajero.getMoney(500);
 
-//Client callin
-//client.addMoney(client.id);
-/* END EJERCICIO */
+/* ========================================== END EJERCICIO ========================================== */
 
 /* PLANTEAMIENTO */
 //CAJERO
