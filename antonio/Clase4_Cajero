@@ -8,8 +8,9 @@ var cajero = {
 	saldo : deposito,
 	moneda: "€",
 
-	checkUser : function(user.id,user.pass) {
-
+	checkUser : function() {
+	
+		//user.id,user.pass
 		//user.id >> busca user.pass = expectedPass
 
 		//if expectedPass === user.pass de args
