@@ -19,7 +19,7 @@ var cajero = {
 		} else {
 
 			//ERROR
-			console.error("Login fallido");
+			console.error("Usuario no reconocido, por favor comprueba su ID");
 
 		}
 		
