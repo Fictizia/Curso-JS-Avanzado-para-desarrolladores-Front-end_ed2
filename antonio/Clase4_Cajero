@@ -8,73 +8,70 @@ var cajero = {
 	saldo : deposito,
 	moneda: "€",
 
-	checkUser : function(id,pass) {
+	checkUser : function(user.id,user.pass) {
 
-		//user.id _ busca user.pass (expectedPass)
+		//user.id >> busca user.pass = expectedPass
 
-			//if expectedPass === pass
+		//if expectedPass === user.pass de args
 
-				//Exito = continua haciendo lo que toque
+			= Exito = continua haciendo lo que toque > return user.id & user.permisos
 
-			//else 
+		//else 
 
-				//Error > "Por favor compruebe su usuario o su contraseña"
-
-	}
-
-	addMoney : function(id,pass,cantidad a ingresar) {
-
-		//this.checkUser(id,pass);
-		//IF EXITO
-		
-			//IF (Cantidad a ingresar <= 0)
-
-				= ERROR "Por favor introduzca otra cantidad"
-
-			//ELSE
-				//&& user.admin
-				
-					//cajero.saldo + cantidad a ingresar
-
-				//&& user.cliente		
-
-					//cliente.saldo + cantidad a ingresar
-					//cajero.saldo + cantidad a ingresar
+			= ERROR "Por favor compruebe su usuario o su contraseña"
 
 	}
 
-	getMoney : function(id,pass,cantidad a ingresar) {
-
-		//this.checkUser(id,pass);
-		//IF EXITO
+	//INGRESAR
+	addMoney : function(user.id,user.permisos,cantidad) {
 		
-			//IF (Cantidad a retirar <= 0)
+		//IF (Cantidad a ingresar <= 0)
 
-				= ERROR "Por favor introduzca otra cantidad"
+			= ERROR "Por favor introduzca otra cantidad"
 
-			//ELSE
+		//ELSE
+			//if user.admin
+			
+				= cajero.saldo + cantidad a ingresar
 
-				//&& user = admin
+			//if user.cliente		
 
-					//cajero.saldo - cantidad a retirar
+				= cliente.saldo + cantidad a ingresar
+				= cajero.saldo + cantidad a ingresar
 
-						//if (saldoCajero < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+	}
 
-				//&& user = cliente
+	//RETIRAR
+	getMoney : function(user.id,user.permisos,cantidad) {
+		
+		//IF (Cantidad a retirar <= 0)
+
+			= ERROR "Por favor introduzca otra cantidad"
+
+		//ELSE
+
+			//cajero.saldo - cantidad a retirar
+
+				//if (cajero.saldo < 0) 
+
+					= ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+
+				//else if (user.admin)
+
+					= Exito = Print Nuevo cajero.saldo
+
+				//else if (user.cliente)
 
 					//cliente.saldo - cantidad a retirar
 
-						//if (cajero.saldo < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+						//if (cliente.saldo < 0) 
 
-						//else if (cliente.saldo < 0) > ERROR "Cliente no tiene saldo suficiente"
+							= ERROR "Cliente no tiene saldo suficiente"
 
-						//ELSE > Exito > Print cliente.saldo
+						//ELSE 
 
-					//cajero.saldo - cantidad a retirar
-
-						//if (cajero.saldo < 0) > ERROR
-
-						//ELSE > Exito > Print cajero.saldo
+							= Exito = Print cliente.saldo
+							= Exito = Print Nuevo cajero.saldo
 
 	}
 
@@ -95,8 +92,23 @@ var user = {
 	//tipos de user admin o client
 	permisos : admin o client,
 
-	addMoney : cajero.addMoney(id,pass,cantidad)
-	getMoney : cajero.getMoney(id,pass,cantidad);
+	addMoney : function(user.id,user.pass,cantidad) {
+
+				//cajero.checkUser(user.id,user.pass);
+
+					//IF EXITO
+					= cajero.addMoney(user.id,user.permisos,cantidad)
+
+			}
+
+	getMoney : function(user.id,user.pass,cantidad) {
+
+				//cajero.checkUser(user.id,user.pass);
+
+					//IF EXITO
+					= cajero.getMoney(user.id,user.permisos,cantidad)
+
+			}
 
 }
 
@@ -108,21 +120,24 @@ var user = {
 
 		//Existe esa ID?
 
-			//NO > Go > Crear nuevo Cliente
+			//NO = Go = Crear nuevo Cliente
 
-				//IF clienteNewSaldo < 0
+				//IF (clienteNewSaldo < 0 || clienteNewSaldo = undefined)
 
-					//ERROR = "Saldo no valido, se creara el cliente con saldo = 0"
-
-				//IF clienteNewSaldo = undefined
+					= ERROR > Saldo no valido, se creara el cliente con saldo = 0
 
 					cliente.saldo = 0;
+
+					= EXITO Print "Nuevo cliente con ID tal y saldo inicial 0 creado"
 
 				//ELSE
 
 					cliente.saldo = clienteNewSaldo;
+					= EXITO Print "Nuevo cliente con ID tal y saldo inicial X creado"
 
-			//YES > ERROR "Ese cliente ya tiene cuenta"
+			//YES 
+
+				= ERROR "Ese cliente ya tiene cuenta"
 		
 	}
 
@@ -131,9 +146,13 @@ var user = {
 
 		//Existe esa ID?
 
-			//NO > ERROR "Ese cliente no existe"
+			//NO 
 
-			//YES > Go > Delete cliente
+				= ERROR "Ese cliente no existe"
+
+			//YES 
+
+				= Go "Cliente ID borrado"
 		
 	}
 */
