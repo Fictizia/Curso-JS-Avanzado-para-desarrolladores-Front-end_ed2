@@ -113,91 +113,7 @@ cajero.login(client.id);
 
 /* ========================================== END EJERCICIO ========================================== */
 
-/* PLANTEAMIENTO */
-//CAJERO
-var deposito = 10000;
 
-var cajero = {
-	
-	empresa : "GrahoBank",
-	tipo : "Callejero",
-	saldo : deposito,
-	moneda: "€",
-
-	checkUser : function() {
-	
-		//user.id,user.pass
-		//user.id >> busca user.pass = expectedPass
-
-		//if expectedPass === user.pass de args
-
-			= Exito = continua haciendo lo que toque > return user.id & user.permisos
-
-		//else 
-
-			= ERROR "Por favor compruebe su usuario o su contraseña"
-
-	}
-
-	//INGRESAR
-	addMoney : function(user.id,user.permisos,cantidad) {
-		
-		//IF (Cantidad a ingresar <= 0)
-
-			= ERROR "Por favor introduzca otra cantidad"
-
-		//ELSE
-			//if user.admin
-			
-				= cajero.saldo + cantidad a ingresar
-
-			//if user.cliente		
-
-				= cliente.saldo + cantidad a ingresar
-				= cajero.saldo + cantidad a ingresar
-
-	}
-
-	//RETIRAR
-	getMoney : function(user.id,user.permisos,cantidad) {
-		
-		//IF (Cantidad a retirar <= 0)
-
-			= ERROR "Por favor introduzca otra cantidad"
-
-		//ELSE
-
-			//cajero.saldo - cantidad a retirar
-
-				//if (cajero.saldo < 0) 
-
-					= ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
-
-				//else if (user.admin)
-
-					= Exito = Print Nuevo cajero.saldo
-
-				//else if (user.cliente)
-
-					//cliente.saldo - cantidad a retirar
-
-						//if (cliente.saldo < 0) 
-
-							= ERROR "Cliente no tiene saldo suficiente"
-
-						//ELSE 
-
-							= Exito = Print cliente.saldo
-							= Exito = Print Nuevo cajero.saldo
-
-	}
-
-};
-
-//Saldo Cajero
-//console.log(cajero.saldo+cajero.moneda);
-
-//Users > 2 tipos > Admin y Client
 
 //All Users
 var user = {
@@ -229,52 +145,47 @@ var user = {
 
 }
 
-//user.admin
+//Falta user.admin crear o borrar clientes
 /*
 
-	//Admin añade cliente
-	addClient : function(clientNewID,clientNewPass,clienteNewSaldo) {
+//Admin añade cliente
+addClient : function(clientNewID,clientNewPass,clienteNewSaldo) {
 
-		//Existe esa ID?
+//Existe esa ID?
 
-			//NO = Go = Crear nuevo Cliente
+	//NO = Go = Crear nuevo Cliente
 
-				//IF (clienteNewSaldo < 0 || clienteNewSaldo = undefined)
+		//IF (clienteNewSaldo < 0 || clienteNewSaldo = undefined)
 
-					= ERROR > Saldo no valido, se creara el cliente con saldo = 0
+			= ERROR > Saldo no valido, se creara el cliente con saldo = 0
 
-					cliente.saldo = 0;
+			cliente.saldo = 0;
 
-					= EXITO Print "Nuevo cliente con ID tal y saldo inicial 0 creado"
+			= EXITO Print "Nuevo cliente con ID tal y saldo inicial 0 creado"
 
-				//ELSE
+		//ELSE
 
-					cliente.saldo = clienteNewSaldo;
-					= EXITO Print "Nuevo cliente con ID tal y saldo inicial X creado"
+			cliente.saldo = clienteNewSaldo;
+			= EXITO Print "Nuevo cliente con ID tal y saldo inicial X creado"
 
-			//YES 
+	//YES 
 
-				= ERROR "Ese cliente ya tiene cuenta"
-		
-	}
+		= ERROR "Ese cliente ya tiene cuenta"
 
-	//Admin quita cliente
-	deleteClient : function(clientID) {
+}
 
-		//Existe esa ID?
+//Admin quita cliente
+deleteClient : function(clientID) {
 
-			//NO 
+//Existe esa ID?
 
-				= ERROR "Ese cliente no existe"
+	//NO 
 
-			//YES 
+		= ERROR "Ese cliente no existe"
 
-				= Go "Cliente ID borrado"
-		
-	}
-*/
+	//YES 
 
-//user.client
-/*
-	saldo : dinero que tiene el cliente
+		= Go "Cliente ID borrado"
+
+}
 */
