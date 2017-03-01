@@ -8,49 +8,73 @@ var cajero = {
 	saldo : deposito,
 	moneda: "€",
 
-	addMoney : function(cantidad a ingresar,user) {
-		
-		//if cantidad a ingresar > 0
-			//&& user.admin
-			
-				//cajero.saldo + cantidad a ingresar
+	checkUser : function(id,pass) {
 
-			//&& user.cliente		
+		//user.id _ busca user.pass (expectedPass)
 
-				//cliente.saldo + cantidad a ingresar
-				//cajero.saldo + cantidad a ingresar
+			//if expectedPass === pass
 
-		//else > ERROR "Cantidad a ingresar <= 0"
+				//Exito = continua haciendo lo que toque
+
+			//else 
+
+				//Error > "Por favor compruebe su usuario o su contraseña"
 
 	}
 
-	getMoney : function(cantidad a retirar,user) {
+	addMoney : function(id,pass,cantidad a ingresar) {
+
+		//this.checkUser(id,pass);
+		//IF EXITO
 		
-		//if cantidad a retirar > 0
+			//IF (Cantidad a ingresar <= 0)
 
-			//&& user = admin
+				= ERROR "Por favor introduzca otra cantidad"
 
-				//cajero.saldo - cantidad a retirar
+			//ELSE
+				//&& user.admin
+				
+					//cajero.saldo + cantidad a ingresar
 
-					//if (saldoCajero < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+				//&& user.cliente		
 
-			//&& user = cliente
+					//cliente.saldo + cantidad a ingresar
+					//cajero.saldo + cantidad a ingresar
 
-				//cliente.saldo - cantidad a retirar
+	}
 
-					//if (cajero.saldo < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+	getMoney : function(id,pass,cantidad a ingresar) {
 
-					//else if (cliente.saldo < 0) > ERROR "Cliente no tiene saldo suficiente"
+		//this.checkUser(id,pass);
+		//IF EXITO
+		
+			//IF (Cantidad a retirar <= 0)
 
-					//ELSE > Exito > Print cliente.saldo
+				= ERROR "Por favor introduzca otra cantidad"
 
-				//cajero.saldo - cantidad a retirar
+			//ELSE
 
-					//if (cajero.saldo < 0) > ERROR
+				//&& user = admin
 
-					//ELSE > Exito > Print cajero.saldo
+					//cajero.saldo - cantidad a retirar
 
-		//else > ERROR "Cantidad a retirar <= 0"
+						//if (saldoCajero < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+
+				//&& user = cliente
+
+					//cliente.saldo - cantidad a retirar
+
+						//if (cajero.saldo < 0) > ERROR "Cajero no dispone de saldo suficiente, retire una cantidad inferior"
+
+						//else if (cliente.saldo < 0) > ERROR "Cliente no tiene saldo suficiente"
+
+						//ELSE > Exito > Print cliente.saldo
+
+					//cajero.saldo - cantidad a retirar
+
+						//if (cajero.saldo < 0) > ERROR
+
+						//ELSE > Exito > Print cajero.saldo
 
 	}
 
@@ -71,7 +95,7 @@ var user = {
 	//tipos de user admin o client
 	permisos : admin o client,
 
-	addMoney : cajero.addMoney(id,pass,cantidad);
+	addMoney : cajero.addMoney(id,pass,cantidad)
 	getMoney : cajero.getMoney(id,pass,cantidad);
 
 }
@@ -86,7 +110,11 @@ var user = {
 
 			//NO > Go > Crear nuevo Cliente
 
-				//IF clienteNewSaldo = undefined 
+				//IF clienteNewSaldo < 0
+
+					//ERROR = "Saldo no valido, se creara el cliente con saldo = 0"
+
+				//IF clienteNewSaldo = undefined
 
 					cliente.saldo = 0;
 
