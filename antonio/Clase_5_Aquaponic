@@ -1,0 +1,53 @@
+//AQUAPONIC
+
+//1 * OBJETOS CON CONSTRUCTORES
+
+//TANQUE
+	//Capacidad = 40l
+	//Dimensiones = 51 fondo x 25.5 ancho x 30.5 alto
+	//Color = Gris claro
+	//Nivel Agua Max = 29cm > cm???
+
+var tanque = function(capacidad,dimensiones,color,aguaMax) {
+	
+	this.capacidad = capacidad;
+	this.dimensiones = dimensiones;
+	this.color = color;
+	this.aguaMax = aguaMax;
+
+};
+
+//CAMA
+	//Capacidad = 10l
+	//Dimensiones = 51 fondo x 25.5 ancho x 30.5 alto
+	//Color = Rojo
+	//Nivel Agua Max = 5cm
+	//Sustrato = Puedra Volcanica
+
+var cama = function(capacidad,dimensiones,color,aguaMax,sustrato) {
+	
+	this.capacidad = capacidad;
+	this.dimensiones = dimensiones;
+	this.color = color;
+	this.aguaMax = aguaMax;
+
+};
+
+var dimensiones = function (fondo,ancho,alto) {
+	
+	this.fondo = fondo;
+	this.ancho = ancho;
+	this.alto = alto;
+
+}
+
+/* ================================================================== */
+
+//2 * Metodos y Propiedades
+
+	· Add / Get Water
+	· Check Water Level = Avoid Desbordamientos
+	· If Desbordamiento === Activar desagüe para eliminar exceso de agua
+
+//3 * Peces y Plantas // Comprobar estado
+//4 * Mejorar Add Water para leer las propiedas de la misma // Cloro p.e.
