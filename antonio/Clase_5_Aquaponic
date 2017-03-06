@@ -109,7 +109,7 @@ tanque.addWater(10);
 //Get Water
 tanque.getWater(5);
 
-//3 *
+//3.1 *
 //AÑADIR PECES =================================================================
 
 TanqueBuilder.prototype.peces = [];
@@ -169,6 +169,34 @@ tanque.addPeces("Carpa",7);
 tanque.addPeces("Nemo",5);
 tanque.addPeces("Carpa",2);
 
+//3.2 *
+// QUITAR PECES ================================================================
+
+TanqueBuilder.prototype.getPeces = getItems;
+
+function getItems(especie,cantidad) {
+
+    for(var i in this.peces) {
+
+		if(especie === this.peces[i].especie && this.peces[i].cantidad > 0) {
+
+			this.peces[i].cantidad -= cantidad;
+			console.info("Ahora quedan "+this.peces[i].cantidad+" "+this.peces[i].especie+" en el tanque.");
+			return this.peces[i].cantidad;
+
+		} else {
+
+			console.warn("No hay ninguno de "+especie);
+			return;
+
+		}
+
+	}
+
+};
+
+tanque.getPeces("Carpa",3);
+
 //4 *
 //Imprimir estado e info =================================================================
 
@@ -194,8 +222,8 @@ function printEstado() {
 
             for(var n in tanque[propName]) {
 
-		var print = tanque[propName][n];
-		console.log(print);
+				var print = tanque[propName][n];
+				console.log(print);
 
             }
 
