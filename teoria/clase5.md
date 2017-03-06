@@ -623,7 +623,101 @@ Nota: No usar herencia
     - En caso de desbordamiento debe activarse el desagüe para eliminar el exceso de agua.
 
 ```javascript
-	// Tu solución
+    var debugMode = true;
+
+    function chivato (tipo, mensaje) {
+        if (debugMode) {
+            if(tipo == "warn"){
+                console.warn(mensaje);
+            } else {
+                console.log(mensaje);
+            }
+        }
+    }
+
+    var acuApp = {};
+    
+    // Constructores
+    acuApp.constructores = {
+      constructorTanque: function (nombre, capacidad, capacidadMedida, alto, ancho, largo, dimensionesMedida, color, nivelAguaMaximo) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.capacidadMedida = capacidadMedida;
+        this.dimensiones = alto * ancho * largo;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.largo = largo;
+        this.dimensionesMedida = dimensionesMedida;
+        this.color = color;
+        this.nivelAguaMaximo = nivelAguaMaximo;
+        this.desagueFuncionando = false;
+        this.nivelAgua = 0;
+        /* Funciones */
+
+        this.agregarAgua = function(litros){
+            this.nivelAgua = this.nivelAgua + litros;
+            if(this.nivelAgua >= this.nivelAguaMaximo){
+                if(!this.desagueFuncionando){
+                    this.desagueFuncionando = true;
+                    chivato("warn", "Se activó el sistema de desagüe de emergencia en "+this.nombre);
+                }
+                chivato("log", "nivel actual: "+this.nivelAgua);
+                this.quitarAgua(this.nivelAgua-this.nivelAguaMaximo);
+            }
+        };
+        this.quitarAgua = function(litros){
+            this.nivelAgua = this.nivelAgua-litros;
+            if(this.desagueFuncionando){
+                this.desagueFuncionando = false;
+                chivato("log", "Se desactivo el sistema de desagüe de emergencia en "+this.nombre);
+            }
+            chivato("log", "nivel actual: "+this.nivelAgua);
+        };
+    },
+      constructorCama: function (nombre, capacidad, capacidadMedida, alto, ancho, largo, dimensionesMedida, color, nivelAguaMaximo, sustrato) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.capacidadMedida = capacidadMedida;
+        this.dimensiones = alto * ancho *largo;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.largo = largo;
+        this.medida = dimensionesMedida;
+        this.color = color;
+        this.nivelAguaMaximo = nivelAguaMaximo;
+        this.sustrato = sustrato;
+        this.desagueFuncionando = false;
+        this.nivelAgua = 0;
+        /* Funciones */
+
+        this.agregarAgua = function(litros){
+            this.nivelAgua = this.nivelAgua + litros;
+            if(this.nivelAgua >= this.nivelAguaMaximo){
+                if(!this.desagueFuncionando){
+                    this.desagueFuncionando = true;
+                    chivato("warn", "Se activó el sistema de desagüe de emergencia en "+this.nombre);
+                }
+                chivato("log", "nivel actual: "+this.nivelAgua);
+                this.quitarAgua(this.nivelAgua-this.nivelAguaMaximo);
+            }
+        };
+        this.quitarAgua = function(litros){
+            this.nivelAgua = this.nivelAgua-litros;
+            if(this.desagueFuncionando){
+                this.desagueFuncionando = false;
+                chivato("log", "Se desactivo el sistema de desagüe de emergencia en "+this.nombre);
+            }
+            chivato("log", "nivel actual: "+this.nivelAgua);
+        };
+    	}
+    };
+
+	// Pruebas
+    acuApp.tanque1 = new acuApp.constructores.constructorTanque("Tanque principal",40, "Litros", 30.5, 25.5, 51, "Cm", "Gris Claro", 2);
+    acuApp.cama1 = new acuApp.constructores.constructorCama("Cama principal", 10, "Litros", 10, 25.5, 51, "Cm", "Rojo", 5, "Piedra volcánica");
+    acuApp.cama1.agregarAgua(100);
+    acuApp.tanque1.agregarAgua(987);
+
 ```
 
 
