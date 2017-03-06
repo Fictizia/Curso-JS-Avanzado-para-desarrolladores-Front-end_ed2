@@ -1,7 +1,7 @@
 /* ============================ CLASE 7 ============================ */
 
 //1 * Reordenar alfabeticamente profes fictizia
-
+/* ====================================================================
 //Buscar el nombre
 var listaProfes = document.querySelectorAll("ul#teachersList > li");
 
@@ -13,5 +13,41 @@ for(var i in listaProfes) {
 };
 
 var listaLiNombres = Array.prototype.slice.call(listaDivs);
-
 console.log(listaNombres);
+
+//2 * Cursos Fictizia
+/* ====================================================================
+
+//3 * Estado lineas de metro
+/* ====================================================================
+
+var allItems = document.querySelectorAll(".circulacion .txt a");
+//var itemsArray = Array.prototype.slice.call(allItems);
+var itemsArray = allItems;
+
+for(var i=0; i <= itemsArray.length ; i++) {
+
+	if(itemsArray[i] != undefined) {
+		var printRes = itemsArray[i].text;
+		console.log(printRes);
+    }
+
+};
+
+//4 * El mundotoday allimgs to kitten
+/* ====================================================================
+
+var allItems = document.getElementsByTagName("img");
+//var itemsArray = Array.prototype.slice.call(allItems);
+var itemsArray = allItems;
+
+for(var i=0; i <= itemsArray.length ; i++) {
+
+	if(itemsArray[i] != undefined) {
+		itemsArray[i].src = "https://placekitten.com/800/400";
+    }
+
+};
+
+//5 * Genbeta
+/* ====================================================================
