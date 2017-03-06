@@ -580,7 +580,37 @@ Uno para el tanque de los peces y otro para la cama (recipiente para vegetales).
 Nota: No usar herencia
 
 ```javascript
-	// Tu solución
+    var acuApp = {};
+
+    // Constructores
+    acuApp.constructorTanque = function (capacidad, capacidadMedida, alto, ancho, largo, dimensionesMedida, color, nivelAguaMaximo) {
+        this.capacidad = capacidad;
+        this.capacidadMedida = capacidadMedida;
+        this.dimensiones = alto * ancho *largo;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.largo = largo;
+        this.dimensionesMedida = dimensionesMedida;
+        this.color = color;
+        this.nivelAguaMaximo = nivelAguaMaximo;
+    };
+
+    acuApp.constructorCama = function (capacidad, capacidadMedida, alto, ancho, largo, dimensionesMedida, color, nivelAguaMaximo, sustrato) {
+        this.capacidad = capacidad;
+        this.capacidadMedida = capacidadMedida;
+        this.dimensiones = alto * ancho *largo;
+        this.alto = alto;
+        this.ancho = ancho;
+        this.largo = largo;
+        this.medida = dimensionesMedida;
+        this.color = color;
+        this.nivelAguaMaximo = nivelAguaMaximo;
+        this.sustrato = sustrato;
+    };
+
+	// Pruebas
+    acuApp["tanque principal"] = new acuApp.constructorTanque(40, "Litros", 30.5, 25.5, 51, "Cm", "Gris Claro", 2);
+    acuApp["cama principal"] = new acuApp.constructorCama(10, "Litros", 10, 25.5, 51, "Cm", "Rojo", 5, "Piedra volcánica");
 ```
 
 
