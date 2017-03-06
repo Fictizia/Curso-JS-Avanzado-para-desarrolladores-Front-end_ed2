@@ -1,0 +1,17 @@
+/* ============================ CLASE 7 ============================ */
+
+//1 * Reordenar alfabeticamente profes fictizia
+
+//Buscar el nombre
+var listaProfes = document.querySelectorAll("ul#teachersList > li");
+
+for(var i in listaProfes) {
+	
+	var leyendoNombres = listaProfes[i].innerHTML;
+	//console.log(leyendoNombres);
+
+};
+
+var listaLiNombres = Array.prototype.slice.call(listaDivs);
+
+console.log(listaNombres);
