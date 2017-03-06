@@ -10,7 +10,8 @@ for(var i=0; i<=itemsArray.length; i++) {
 	
 	if(itemsArray[i] !== undefined) {
 
-		itemsArray[i].innerHTML = "<p>Cambio </p>"+i;	
+		var printRes = itemsArray[i].querySelector(".teacherInfo h4").innerText;
+		console.log(printRes);
 
 	}
 
