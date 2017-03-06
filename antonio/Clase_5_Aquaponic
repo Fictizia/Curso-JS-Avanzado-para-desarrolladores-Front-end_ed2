@@ -1,0 +1,217 @@
+//AQUAPONIC
+/* ================================================================== */
+
+/*TANQUE
+	//Capacidad = 40l
+	//Dimensiones = 51 fondo x 25.5 ancho x 30.5 alto cm
+	//Constantes Fondo y Ancho
+	//Color = Gris claro
+	//Nivel Agua Max = 29cm === Altura
+*/
+
+//1 * Constructor objeto tanque
+var TanqueBuilder = function(capacidad,color,nivel,aguaMax) {
+
+	this.capacidad = capacidad;
+	this.color = color;
+
+	this.nivel = nivel; //Inicial 0 --> 0 Limite Nivel para restar agua--> CM!!!
+	this.aguaMax = aguaMax; //Limite Nivel para sumar agua--> CM!!!
+
+	//Constantes
+	this.fondo = 51;
+	this.ancho = 25.5;
+
+	/* Add/Get Water con Bind --> En lugar de extender el prototype mas abajo
+	this.addWater = addWater.bind(this);
+	this.getWater = getWater.bind(this);
+	*/
+
+};
+
+/* ===================================== SOLUCIONES ===================================== */
+
+// 1 *
+//Creamos el tanque
+var tanque = new TanqueBuilder(40,"Gris Claro",0,29);
+
+// 2 *
+//AÑADIR Y QUITAR AGUA
+
+TanqueBuilder.prototype.addWater = addWater;
+TanqueBuilder.prototype.getWater = getWater;
+
+//F ADD WATER
+//AL SUMAR AGUA SUMAMOS LITROS --> Necesito CM para comparar con AguaMax
+function addWater(cantidad) {
+
+	//h = v / (a*f) --> Nivel --> El controlador
+
+	//Faltaria --> Comprobar que cantidad es > 0
+	//Convertimos cantidad de litros a cm3
+	cantidad = cantidad*1000;
+	
+	var controlNivel = cantidad/(this.fondo*this.ancho);
+	//console.warn("Var controlNivel: "+controlNivel);
+
+	this.nivel += controlNivel;
+
+	if (this.nivel > this.aguaMax) {
+
+		//Cuanto vaciamos?
+		var desague = (this.fondo*this.ancho)*(this.nivel - this.aguaMax)/1000;
+		var printDesague = parseFloat(desague).toFixed(2);
+		console.warn("DESBORDAMIENTO!!! Se han desaguado "+printDesague+"l");
+
+		//El nivel final sera el limite
+		this.nivel = this.aguaMax;
+		return this.nivel;
+
+	} else {
+
+		//Si no, sumamos y punto
+		var printNivel = parseFloat(this.nivel).toFixed(2);
+		console.info("El nuevo nivel del agua es "+printNivel+"cm");
+		return this.nivel;
+
+	};
+
+};
+
+//F GET WATER
+function getWater(cantidad) {
+
+	//Faltaria --> Comprobar que cantidad es > 0
+	cantidad = cantidad*1000;
+	var controlNivel = cantidad/(this.fondo*this.ancho);
+
+	this.nivel -= controlNivel;
+
+	if(this.nivel <= 0) {
+
+		this.nivel = 0;
+		console.warn("ATENCIÓN!!! No queda agua en el tanque");
+
+	} else {
+
+		//Si no, restamos y punto
+		var printNivel = parseFloat(this.nivel).toFixed(2);
+		console.info("El nuevo nivel del agua es "+printNivel+"cm");
+		return this.nivel;
+
+	};
+
+
+};
+
+//Add Water
+tanque.addWater(10);
+//Get Water
+tanque.getWater(5);
+
+//3 *
+//AÑADIR PECES =================================================================
+
+TanqueBuilder.prototype.peces = [];
+TanqueBuilder.prototype.addPeces = addItems;
+
+//Constructor Peces / Items
+var PezBuilder = function(especie,cantidad) {
+
+	this.especie = especie;
+	this.cantidad = cantidad;
+
+};
+
+
+function addItems(especie,cantidad) {
+
+	if( this.peces.length > 0 ) {
+		
+		for(var i in this.peces) {
+			
+			if(this.peces[i].especie === especie) {
+				
+				this.peces[i].cantidad += cantidad;
+				//VER
+				var print = "Mas "+this.peces[i].especie+" Total: "+this.peces[i].cantidad;
+				console.log(print);
+				return;
+
+            } else {
+
+				add.call(this);
+
+			}
+		}
+
+    } else {
+
+        add.call(this);
+
+    }
+
+    function add() {
+
+		this.peces.push(new PezBuilder(especie,cantidad));
+		//VER
+		for(var i in this.peces) {
+			var print = this.peces[i].especie+" Total: "+this.peces[i].cantidad+" indice: "+i;
+			console.log("Nueva especie "+print);
+		}
+
+    }
+
+};
+
+//Add Peces
+tanque.addPeces("Carpa",7);
+tanque.addPeces("Nemo",5);
+tanque.addPeces("Carpa",2);
+
+//4 *
+//Imprimir estado e info =================================================================
+
+//console.log(JSON.stringify(tanque));
+
+var propValue;
+
+function printEstado() {
+
+	console.log("=====================");
+	console.info("=== ESTADO TANQUE ===");
+	console.log("=====================");
+
+    for(var propName in tanque) {
+
+        if( typeof tanque[propName] === "function") {
+
+            continue;
+            //console.warn("Soy Una Funcion");
+
+        //IF es un objeto --> Peces
+        } else if (tanque[propName] === Object(tanque[propName])) {
+
+            for(var n in tanque[propName]) {
+
+		var print = tanque[propName][n];
+		console.log(print);
+
+            }
+
+        //Para todo lo demás
+        } else {
+
+            propValue = tanque[propName]
+            console.log(propName,propValue);
+
+        }
+
+    }
+
+}
+
+printEstado();
+
+/* END TANQUE */
+/* ================================================================== */
