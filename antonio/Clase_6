@@ -3,17 +3,18 @@
 //1 * Reordenar alfabeticamente profes fictizia
 /* ====================================================================
 //Buscar el nombre
-var listaProfes = document.querySelectorAll("ul#teachersList > li");
+var allItems = document.querySelectorAll("ul#teachersList > li");
+var itemsArray = Array.prototype.slice.call(allItems);
 
-for(var i in listaProfes) {
+for(var i=0; i<=itemsArray.length; i++) {
 	
-	var leyendoNombres = listaProfes[i].innerHTML;
-	//console.log(leyendoNombres);
+	if(itemsArray[i] !== undefined) {
 
-};
+		itemsArray[i].innerHTML = "<p>Cambio </p>"+i;	
 
-var listaLiNombres = Array.prototype.slice.call(listaDivs);
-console.log(listaNombres);
+	}
+
+}
 
 //2 * Cursos Fictizia
 /* ====================================================================
@@ -27,7 +28,7 @@ var itemsArray = allItems;
 
 for(var i=0; i <= itemsArray.length ; i++) {
 
-	if(itemsArray[i] != undefined) {
+	if(itemsArray[i] !== undefined) {
 		var printRes = itemsArray[i].text;
 		console.log(printRes);
     }
@@ -43,7 +44,7 @@ var itemsArray = allItems;
 
 for(var i=0; i <= itemsArray.length ; i++) {
 
-	if(itemsArray[i] != undefined) {
+	if(itemsArray[i] !== undefined) {
 		itemsArray[i].src = "https://placekitten.com/800/400";
     }
 
