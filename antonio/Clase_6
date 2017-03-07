@@ -2,34 +2,29 @@
 
 //1 * Reordenar alfabeticamente profes fictizia
 /* ====================================================================
+# MAL!!! Borra algunos <li> al reordenar y duplica otros
+
 var allItems = document.querySelectorAll("ul#teachersList > li");
 var itemsArray = Array.prototype.slice.call(allItems);
 
+# localeCompare ?? para evitar acentos y demas
 function compare(a,b) {
-  if (a.querySelector("li .teacherInfo h4").innerText < b.querySelector("li .teacherInfo h4").innerText)
+  if (a.querySelector(".teacherInfo h4").innerText < b.querySelector(".teacherInfo h4").innerText)
     return -1;
-  if (a.querySelector("li .teacherInfo h4").innerText > b.querySelector("li .teacherInfo h4").innerText)
+  if (a.querySelector(".teacherInfo h4").innerText > b.querySelector(".teacherInfo h4").innerText)
     return 1;
   return 0;
 }
 
 itemsArray.sort(compare);
 
-document.querySelector("ul#teachersList > li").innerHTML = "";
-document.querySelector("ul#teachersList > li").innerHTML = itemsArray[0].innerHTML;
-
-/*
 for(var i=0; i<=itemsArray.length; i++) {
-	
-	if(itemsArray[i] !== undefined) {
 
-		var printRes = itemsArray[i].querySelector(".teacherInfo h4").innerText;
-		console.log(printRes);
+    if(itemsArray[i] !== undefined) {
+	allItems[i].innerHTML = itemsArray[i].innerHTML;
+    }
 
-	}
-
-}
-*/
+};
 
 //2 * Cursos Fictizia
 /* ====================================================================
