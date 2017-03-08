@@ -1,0 +1,38 @@
+<!--Incluir lib FiB-->
+<!-- V3 -->
+<!--<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>-->
+
+<!-- V2 -->
+<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script>
+
+//Arrancar la mia
+// Initialize Firebase --> V3
+/*
+var config = {
+  apiKey: "AIzaSyBce7z20_LG94V7rnnzWJltHGCeFl0Sah8",
+  authDomain: "grahovsky-js-auth.firebaseapp.com",
+  databaseURL: "https://grahovsky-js-auth.firebaseio.com",
+  storageBucket: "grahovsky-js-auth.appspot.com",
+  messagingSenderId: "1092272135393"
+};
+firebase.initializeApp(config);
+*/
+
+// Initialize Firebase --> V3
+var ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
+
+var usersRef = ref.child("users");
+    usersRef.set({
+    alanisawesome: {
+      date_of_birth: "June 23, 1912",
+      full_name: "Alan Turing"
+    },
+    gracehop: {
+      date_of_birth: "December 9, 1906",
+      full_name: "Grace Hopper"
+    }
+});
+
+</script>
