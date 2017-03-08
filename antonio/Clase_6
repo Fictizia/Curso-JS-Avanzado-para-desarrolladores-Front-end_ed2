@@ -28,6 +28,57 @@ for(var i=0; i<=itemsArray.length; i++) {
 
 //2 * Cursos Fictizia
 /* ====================================================================
+var arrayTitles = document.querySelectorAll("ul#trainingAreasTabs li");
+
+function printCourses() {
+
+	console.log("# Cursos de Fictizia");
+
+	for(var i in arrayTitles) {
+
+	    if(arrayTitles[i].innerText !== undefined){
+
+	        var printTitle = arrayTitles[i].innerText;
+	        console.info("## "+printTitle);
+			printSection(i);
+
+	    }
+
+	};
+}
+
+function printSection(i) {
+
+	i = Number(i)+1;
+	var arraySection = document.querySelectorAll("#trainingAreas section:nth-child("+i+") .course");
+
+	var coursesLength = arraySection.length;
+	console.log("**Total de cursos: "+coursesLength+"**");
+	//console.info("ID1: "+i);
+	printSectionCourses(i);
+
+};
+
+function printSectionCourses(id) {
+	
+	//console.info("ID2: "+id);
+	var arraySectionCourses = document.querySelectorAll("#trainingAreas section:nth-child("+id+") .course .courseInfo h2");
+	var l = arraySectionCourses.length;
+	
+	for(var i=1; i<=l; i++) {
+		if(arraySectionCourses[i] !== undefined) {
+		
+		var courseTitle = arraySectionCourses[i].querySelector("a").innerText;
+		var courseLink = arraySectionCourses[i].querySelector("a");
+		console.log("- ["+courseTitle+"] ("+courseLink+").");
+		}
+    }
+
+	console.log("===================================================================");
+	
+}
+
+printCourses();
 
 //3 * Estado lineas de metro
 /* ====================================================================
