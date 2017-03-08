@@ -54,7 +54,7 @@ Teoría | Recursos
 [Clase 5](teoria/clase5.md) | [Clase 5](recursos/clase5.md)
 [Clase 6](teoria/clase6.md) | [Clase 6](recursos/clase6.md)
 [Clase 7](teoria/clase7.md) | [Clase 7](recursos/clase7.md)
-Clase 8 | Clase 8
+[Clase 8](teoria/clase8.md) | [Clase 8](recursos/clase8.md)
 Clase 9 | Clase 9
 Clase 10 | Clase 10
 Clase 11 | Clase 11
