@@ -9,15 +9,19 @@ var itemsArray = Array.prototype.slice.call(allItems);
 
 # localeCompare ?? para evitar acentos y demas
 function compare(a,b) {
+/*
   if (a.querySelector(".teacherInfo h4").innerText < b.querySelector(".teacherInfo h4").innerText)
     return -1;
   if (a.querySelector(".teacherInfo h4").innerText > b.querySelector(".teacherInfo h4").innerText)
     return 1;
   return 0;
+*/
+ a.innerText.localeCompare(b.innerText);
 }
 
 itemsArray.sort(compare);
 
+//Estoy haciendolo a lo bruto --> Mejor con outer y forEach <--
 for(var i=0; i<=itemsArray.length; i++) {
 
     if(itemsArray[i] !== undefined) {
