@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>AJAX REQUEST</title>
+  <meta name="description" content="OMDB HACKERS">
+  <meta name="author" content="Grahovsky">
+
+<script>
+//1 *
+function printRes() {
+
+	console.info("START");
+	//peticionAjax(URL , CALLBACK);
+	callingAjax("http://www.omdbapi.com/?t=Hackers", function(movieInfo){
+
+		//console.log("YESS");
+		document.querySelector(".printRes").innerHTML = JSON.stringify(movieInfo);
+
+	});
+
+}
+
+function callingAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+
+            //console.info(JSON.parse(xmlHttp.responseText));
+            var movieInfo = JSON.parse(xmlHttp.responseText);
+            callback(movieInfo);
+
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+
+            console.error("ERROR! 404");
+            console.warn(JSON.parse(xmlHttp.responseText));
+
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+printRes();
+//END 1 *
+
+</script>
+
+</head>
+<body>
+
+<div class="printRes">
+
+
+</div>
+
+</body>
