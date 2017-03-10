@@ -1,0 +1,175 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Cliente Web</title>
+</head>
+<body>
+    <h1>Test con Firebase</h1>    
+
+
+Login para Usuarios registrados:
+<form>
+email: <input type="text" name="email" /><br><br>
+passw: <input type="text" name="pass" />
+<input type="button" onclick="login(this.form)" value="LOGIN" />
+<input type="button" onclick="logout(this.form)" value="LOGOUT" />
+
+</form>
+
+
+
+<br><br><br><br>
+
+Nuevos usuarios:
+<form>
+email: <input type="text" name="email" /><br><br>
+passw: <input type="text" name="pass" />
+<input type="button" onclick="crearUsuario(this.form)" value="OK" />
+</form>
+
+<br><br><br><br>
+
+
+<input type="button" onclick="test()" value="TEST" />
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script>
+
+/////////////////////////////////////////////////////////////////////////////////
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBmL5Nmp10_m-MrihzCVKI6jVXA5IUXoT0",
+    authDomain: "prueba1-ca931.firebaseapp.com",
+    databaseURL: "https://prueba1-ca931.firebaseio.com",
+    storageBucket: "prueba1-ca931.appspot.com",
+    messagingSenderId: "991189730067"
+  };
+  firebase.initializeApp(config);
+
+
+
+    // accedo al servicio de trabajo con la base de datos en tiempo real
+    var databaseService = firebase.database();
+
+    
+///////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+ 
+
+
+function login(frm) {
+  email = frm.email.value;
+  password = frm.pass.value;
+
+    firebase.auth().signInWithEmailAndPassword(email, password).then(
+        function() {
+            // Sign-out successful.
+            console.log("OK");
+        }, 
+        function(error) {
+            // An error happened.
+            console.log(error.message);
+            
+        });
+
+}
+
+
+function crearUsuario(frm) {
+  email = frm.email.value;
+  password = frm.pass.value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(
+        function() {
+            // Sign-out successful.
+            console.log("OK");
+        }, 
+        function(error) {
+            // An error happened.
+            console.log(error.message);
+            
+        });
+
+}
+
+
+function logout(frm) {
+  email = frm.email.value;
+  password = frm.pass.value;
+
+    firebase.auth().signOut().then(
+        function() {
+            // Sign-out successful.
+            console.log("OK");
+        }, 
+        function(error) {
+            // An error happened.
+            console.log(error.message);
+            
+        });
+
+}
+
+
+
+
+
+
+function test(){
+
+    // obtengo una referencia
+    var referencia = databaseService.ref('testRef');
+
+   // escribo en esa referencia
+    referencia.set({
+        campoTest: 'valor del test',
+        ahora: new Date().getTime()
+    })
+            .then(function() {
+                console.log('dato almacenado correctamente');
+            })
+            .catch(function(error) {
+                console.log('detectado un error', error);
+            });
+
+
+    referencia = databaseService.ref('testRef2');
+    // realizo uso de las promesas
+    referencia.set({
+        campoTest: 'Otro valor del test',
+        ahora: new Date().getTime()
+    })
+            .then(function() {
+                console.log('dato almacenado correctamente');
+            })
+            .catch(function(error) {
+                console.log('detectado un error', error);
+            });
+
+    
+    // obtengo una referencia
+    //var referencia = databaseService.ref('users').child('iduser1').child('nombre');
+
+    // escribo en esa referencia
+    //referencia.set('Miguel Angel Alvarez Sánchez');
+
+
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
