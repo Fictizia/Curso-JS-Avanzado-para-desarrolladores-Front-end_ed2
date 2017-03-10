@@ -57,6 +57,12 @@ function callingAjax(url,callback) {
 printRes();
 //END 1 *
 
+//2 *
+//API key --> 54655edd346ca3178992f5584e557a90
+//EXAMPLE OF API CALL --> api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=1111111111
+
+//END 2 *
+
 </script>
 
 </head>
