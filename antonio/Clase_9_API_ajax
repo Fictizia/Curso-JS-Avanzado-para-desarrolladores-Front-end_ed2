@@ -39,7 +39,7 @@ function callingAjax(url,callback) {
 
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 
-            console.info(JSON.parse(xmlHttp.responseText));
+            //console.info(JSON.parse(xmlHttp.responseText));
             var movieInfo = JSON.parse(xmlHttp.responseText);
             callback(movieInfo);
 
@@ -54,13 +54,55 @@ function callingAjax(url,callback) {
     xmlHttp.send();
 };
 
-printRes();
+//printRes();
 //END 1 *
 
 //2 *
 //API key --> 54655edd346ca3178992f5584e557a90
-//EXAMPLE OF API CALL --> api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=1111111111
+//EXAMPLE OF API CALL --> http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID={APIKEY}
+var myAPIKey = "54655edd346ca3178992f5584e557a90";
+var myUrlAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117732&APPID="+myAPIKey;
 
+function printRes2() {
+
+	console.info("START");
+	//peticionAjax(URL , CALLBACK);
+	callingAjax(myUrlAPI, function(weatherInfo){
+
+		//console.log("YESS");
+		var divContent = weatherInfo;
+		document.querySelector(".printRes").innerHTML = divContent;
+
+	});
+
+}
+
+function callingAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+
+            console.info(JSON.parse(xmlHttp.responseText));
+            /*
+            var weatherInfo = JSON.parse(xmlHttp.responseText);
+            callback(weatherInfo);
+            */
+
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+
+            console.error("ERROR! 404");
+            console.warn(JSON.parse(xmlHttp.responseText));
+
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+printRes2();
 //END 2 *
 
 </script>
