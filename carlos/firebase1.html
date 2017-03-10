@@ -10,7 +10,7 @@
 Login para Usuarios registrados:
 <form>
 email: <input type="text" name="email" /><br><br>
-passw: <input type="text" name="pass" />
+passw: <input type="password" name="pass" />
 <input type="button" onclick="login(this.form)" value="LOGIN" />
 <input type="button" onclick="logout(this.form)" value="LOGOUT" />
 
@@ -23,7 +23,7 @@ passw: <input type="text" name="pass" />
 Nuevos usuarios:
 <form>
 email: <input type="text" name="email" /><br><br>
-passw: <input type="text" name="pass" />
+passw: <input type="password" name="pass" />
 <input type="button" onclick="crearUsuario(this.form)" value="OK" />
 </form>
 
@@ -32,6 +32,7 @@ passw: <input type="text" name="pass" />
 
 <input type="button" onclick="test()" value="TEST" />
 
+<p id="consola"></p>
 
 
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
@@ -71,10 +72,12 @@ function login(frm) {
         function() {
             // Sign-out successful.
             console.log("OK");
-        }, 
+            document.getElementById("consola").textContent=email+" logged IN";
+        },
         function(error) {
             // An error happened.
             console.log(error.message);
+            document.getElementById("consola").textContent=error.message;
             
         });
 
@@ -89,10 +92,13 @@ function crearUsuario(frm) {
         function() {
             // Sign-out successful.
             console.log("OK");
+            document.getElementById("consola").textContent=email+" creado correctamente";
         }, 
         function(error) {
             // An error happened.
             console.log(error.message);
+            document.getElementById("consola").textContent=error.message;
+
             
         });
 
@@ -107,10 +113,12 @@ function logout(frm) {
         function() {
             // Sign-out successful.
             console.log("OK");
+            document.getElementById("consola").textContent=email+" logged OUT";
         }, 
         function(error) {
             // An error happened.
             console.log(error.message);
+            document.getElementById("consola").textContent=error.message;
             
         });
 
