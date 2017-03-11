@@ -2,33 +2,31 @@
 
 //1 * Reordenar alfabeticamente profes fictizia
 /* ====================================================================
-# MAL!!! Borra algunos <li> al reordenar y duplica otros
-
 var allItems = document.querySelectorAll("ul#teachersList > li");
 var itemsArray = Array.prototype.slice.call(allItems);
 
-# localeCompare ?? para evitar acentos y demas
 function compare(a,b) {
-/*
-  if (a.querySelector(".teacherInfo h4").innerText < b.querySelector(".teacherInfo h4").innerText)
-    return -1;
-  if (a.querySelector(".teacherInfo h4").innerText > b.querySelector(".teacherInfo h4").innerText)
-    return 1;
-  return 0;
-*/
- a.innerText.localeCompare(b.innerText);
-}
+	// --> MAL LA COMPARACIÓN <--
+	//var compare = a.innerText.localeCompare(b.innerText);
+	//console.log("Compare "+compare);
+	a.innerText.localeCompare(b.innerText);
+};
 
 itemsArray.sort(compare);
 
-//Estoy haciendolo a lo bruto --> Mejor con outer y forEach <--
-for(var i=0; i<=itemsArray.length; i++) {
+function reordenar() {
 
-    if(itemsArray[i] !== undefined) {
-	allItems[i].innerHTML = itemsArray[i].innerHTML;
-    }
+	document.querySelector("ul#teachersList").innerHTML = "";
+
+	for(var i in itemsArray) {
+
+        document.querySelector("ul#teachersList").innerHTML += itemsArray[i].outerHTML;
+
+    	}
 
 };
+
+reordenar();
 
 //2 * Cursos Fictizia
 /* ====================================================================
