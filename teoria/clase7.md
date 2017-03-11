@@ -336,5 +336,41 @@ Características:
 **5 -** Diseña un script que agrupe todos los titulares, sus autores y categorias dentro de [Genbeta:dev](http://www.genbetadev.com/) y luego vacíe el html para cargar una lista hecha por nosotros con la información previamente recolectada.
 
 ```javascript
-	// Tu solución
+	var datos = [];
+	var plantilla = "";
+	
+	for(var i = 0; i < document.querySelectorAll(".article-home-header a").length -1; i++){
+		var autor;
+		var titular;
+		var categorias;
+	
+		// Autor 
+		if(document.querySelectorAll(".article-author a")[i]){
+			autor = document.querySelectorAll(".article-author a")[i].innerHTML
+		} else {
+	 		autor = "Desconocido"
+		}
+	
+		// Titular
+		if(document.querySelectorAll(".article-home-header a")[i]){
+			titular = document.querySelectorAll(".article-home-header a")[i].innerHTML
+		} else {
+			titular = "Sin título"
+		}
+	
+		// Categorias
+		if(document.querySelectorAll(".article-category a")[i]){
+			categorias = document.querySelectorAll(".article-category a")[i].innerHTML
+		} else {
+			categorias = "Sin categorizar"
+		}
+	
+		datos.push([ autor, titular, categorias]);
+	
+		plantilla += '<h1>Titular: '+titular+'</h1>';
+		plantilla += '<h3>Autor: '+autor+'</h3>';
+		plantilla += '<p>Categoria: '+categorias+'</p>';
+	};
+	
+	document.body.innerHTML = plantilla;
 ```
