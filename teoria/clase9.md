@@ -307,6 +307,4 @@ Nota: http://openweathermap.org te será de gran ayuda, busca la solución al er
 Recursos:
 - [OMDb API - The Open Movie Database](http://omdbapi.com/)
 
-```javascript
-	// Tu solución
-```
+- **[Solución](http://codepen.io/ulisesgascon/pen/LNJwwo)**
