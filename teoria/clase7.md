@@ -206,8 +206,41 @@ document.body.dispatchEvent(miEvento);
 
 **Solución Parcial**
 ```javascript
-	// Tu solución
+	var profesoresData = "";
+	var profesores = Array.prototype.slice.call(document.querySelectorAll('#teachersList > li'));
+	
+	profesores.sort(function (a, b) {
+	    if (a.innerText < b.innerText)
+	        return -1;
+	    if (a.innerText > b.innerText)
+	        return 1;
+	    return 0;
+	});
+	
+	profesores.forEach(function(profesor){
+	  profesoresData += profesor.outerHTML;
+	})
+	
+	document.getElementById('teachersList').innerHTML = profesoresData;
 ```
+
+**Solución Total**
+```javascript
+	//@see: https://davidwalsh.name/sorting-strings-accented-characters
+	var profesoresData = "";
+	var profesores = Array.prototype.slice.call(document.querySelectorAll('#teachersList > li'));
+	
+	profesores.sort(function (a, b) {
+	    return a.innerText.localeCompare(b.innerText);
+	});
+	
+	profesores.forEach(function(profesor){
+	  profesoresData += profesor.outerHTML;
+	})
+	
+	document.getElementById('teachersList').innerHTML = profesoresData;
+```
+
 
 
 **2 -** Saca una lista de los [cursos disponibles en Fictizia](http://www.fictizia.com/) en las 4 areas de formación y conviertelo en Markdown. 
