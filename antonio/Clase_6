@@ -2,14 +2,15 @@
 
 //1 * Reordenar alfabeticamente profes fictizia
 /* ====================================================================
+
 var allItems = document.querySelectorAll("ul#teachersList > li");
 var itemsArray = Array.prototype.slice.call(allItems);
 
 function compare(a,b) {
 	// --> MAL LA COMPARACIÓN <--
-	//var compare = a.innerText.localeCompare(b.innerText);
-	//console.log("Compare "+compare);
-	a.innerText.localeCompare(b.innerText);
+	//a.innerText.localeCompare(b.innerText);
+	//FALTABA EL RETURNNNN --> 1, -1 o 0
+	return a.innerText.localeCompare(b.innerText);	
 };
 
 itemsArray.sort(compare);
