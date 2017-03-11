@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>AJAX REQUEST</title>
+  <meta name="description" content="OMDB HACKERS">
+  <meta name="author" content="Grahovsky">
+
+<script>
+
+//1 *
+function printRes() {
+
+	console.info("START");
+	//peticionAjax(URL , CALLBACK);
+	callingAjax("http://www.omdbapi.com/?t=Hackers", function(movieInfo){
+
+		//console.log("YESS");
+		var divContent = "<h1>"+movieInfo.Title+" <span class='year'>"+movieInfo.Year+"</span></h1>";
+		divContent += "<div class='extraInfo'><span class=''>Rated:</span> "+movieInfo.Rated;
+		divContent += "<span class=''>Released:</span> "+movieInfo.Released;
+		divContent += "<span class=''>Runtime:</span> "+movieInfo.Runtime;
+		divContent += "</div>";
+		divContent += "<div class='plotInfo'>"+movieInfo.Plot+"</div>";
+		divContent += "<div class='posterImg'><img src="+movieInfo.Poster+" width='100' /></div>";
+		document.querySelector(".printRes").innerHTML = divContent;
+
+	});
+
+}
+
+function callingAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+
+            //console.info(JSON.parse(xmlHttp.responseText));
+            var movieInfo = JSON.parse(xmlHttp.responseText);
+            callback(movieInfo);
+
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+
+            console.error("ERROR! 404");
+            console.warn(JSON.parse(xmlHttp.responseText));
+
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+//printRes();
+//END 1 *
+
+//2 *
+//API key --> 54655edd346ca3178992f5584e557a90
+//EXAMPLE OF API CALL --> http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID={APIKEY}
+var myAPIKey = "54655edd346ca3178992f5584e557a90";
+var myUrlAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117732&APPID="+myAPIKey;
+
+function printRes2() {
+
+	console.info("START");
+	//peticionAjax(URL , CALLBACK);
+	callingAjax(myUrlAPI, function(weatherInfo){
+
+		//console.log("YESS");
+		var divContent = weatherInfo;
+		document.querySelector(".printRes").innerHTML = divContent;
+
+	});
+
+}
+
+function callingAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+
+            console.info(JSON.parse(xmlHttp.responseText));
+            /*
+            var weatherInfo = JSON.parse(xmlHttp.responseText);
+            callback(weatherInfo);
+            */
+
+        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+
+            console.error("ERROR! 404");
+            console.warn(JSON.parse(xmlHttp.responseText));
+
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+printRes2();
+//END 2 *
+
+</script>
+
+</head>
+<body>
+
+<div class="printRes">
+
+
+</div>
+
+</body>

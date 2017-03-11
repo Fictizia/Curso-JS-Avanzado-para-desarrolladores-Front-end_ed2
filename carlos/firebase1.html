@@ -33,6 +33,7 @@ passw: <input type="password" name="pass" />
 <input type="button" onclick="test()" value="TEST" />
 
 <p id="consola"></p>
+<p id="consola2"></p>
 
 
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
@@ -141,9 +142,11 @@ function test(){
     })
             .then(function() {
                 console.log('dato almacenado correctamente');
-            })
-            .catch(function(error) {
+                document.getElementById("consola2").textContent='dato almacenado correctamente';
+            },
+            function(error) {
                 console.log('detectado un error', error);
+                document.getElementById("consola2").textContent=error;
             });
 
 
@@ -155,9 +158,13 @@ function test(){
     })
             .then(function() {
                 console.log('dato almacenado correctamente');
-            })
-            .catch(function(error) {
+                document.getElementById("consola2").textContent='dato almacenado correctamente';
+
+            },
+            function(error) {
                 console.log('detectado un error', error);
+                document.getElementById("consola2").textContent=error;
+
             });
 
     
