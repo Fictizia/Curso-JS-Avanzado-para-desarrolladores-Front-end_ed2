@@ -1,5 +1,3 @@
-<!-- MAL -->
-
 <!doctype html>
 
 <html lang="en">
@@ -12,13 +10,6 @@
 
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
-
-<!--Incluir lib FiB-->
-<!-- V3 -->
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>-->
-
-<!-- V2 -->
-<!--<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>-->
 
 <style type="text/css">
 
@@ -184,9 +175,21 @@ input {
 
 	  <div class="ms-button main-font text-right">
 
-	      <a class="ms-send-query">LOG IN</a>
+	      <a class="ms-send-query" id="login">LOG IN</a>
 
 	  </div>
+
+    <div class="ms-button main-font text-right">
+
+        <a class="ms-send-query" id="logout">LOG OUT</a>
+
+    </div>
+
+    <div class="ms-button main-font text-right">
+
+        <a class="ms-send-query" id="createUser">New User</a>
+
+    </div>
 
 	  <div class="ms-users-list">
 
@@ -196,6 +199,10 @@ input {
 	</div>
 
 </div>
+
+<!--Incluir lib FiB-->
+<!-- V3 -->
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>-->
 
 <script>
 	
@@ -210,65 +217,149 @@ var config = {
 
 firebase.initializeApp(config);
 
-var ref = firebase.database().ref();
-
-//Delete All Children --> para empezar a jugar
-ref.child("users").remove();
-
-//CREATE USERS
-var createUsers = ref.child("users");
-
-createUsers.set({
-  antonio: {
-    email: "antonio@freshcore.es",
-    pass: "12345"
-  },
-  charlotte: {
-    email: "charlotte@freshcore.es",
-    pass: "12345"
-  }
-});
-
-// Create a callback which logs the current auth state
-function authDataCallback(authData) {
-  if (authData) {
-    console.log("User " + authData.uid + " is logged in with " + authData.provider);
-  } else {
-    console.log("User is logged out");
-  }
-}
-
-// Register the callback to be fired every time auth state changes
-//ref.onAuth(authDataCallback);
-var onAuth = firebase.auth();
-
-//STOP LISTENTING TO CHANGES
-//ref.offAuth(authDataCallback);
-
-//LOGIN USERS IN
-// Create a callback to handle the result of the authentication
-function authHandler(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-}
-
 // AUTH VIA EMAIL AND PASSWORD
-function login(useremail,userpass) {
+function logIn(email,password) {
 
-  ref.authWithPassword({
-    email    : useremail,
-    password : userpass
-  }, authHandler);
+  var email = document.getElementById("userEmail").value;
+  var password = document.getElementById("userPass").value;
+
+  // Sign in with email and pass.
+  firebase.auth().signInWithEmailAndPassword(email,password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+    } else {
+      console.warn(errorMessage);
+    }
+    console.log("f login --> "+error);
+  });
+
+};
+
+//USER TEST --> "charlottehl@gmail.com"  "123456"
+//BTN LOG IN
+document.querySelector("#login").addEventListener("click" , logIn);
+//END LOG IN USER
+
+//LOG OUT USER 
+function logOut() {
+
+   if (firebase.auth().currentUser) {
+      // [START signout]
+      firebase.auth().signOut();
+      // [END signout]
+    } else {
+      console.warn("f logOut --> No hay ningún usuario logeado");
+    }
+};
+
+//BTN LOG OUT
+document.querySelector("#logout").addEventListener("click" , logOut);
+//END LOG OUT USER
+
+//CREATE USER
+function createUser() {
+
+  var email = document.getElementById("userEmail").value;
+  var password = document.getElementById("userPass").value;
+
+  // Sign in with email and pass.
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    if (errorCode == 'auth/weak-password') {
+      alert('The password is too weak.');
+    } else {
+      console.warn(errorMessage);
+    }
+    //SI EL EMAIL ES EL MISMO NO TE DEJA!!!
+    console.log("f createUser --> "+error);
+  });
 
 }
+//BTN CREATE USER
+document.querySelector("#createUser").addEventListener("click" , createUser);
+//END CREATE USER
 
-login("charlottehl@gmail.com","123456")
+/**
+ * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+ *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+ *    out, and that is where we update the UI.
+ */
+function initApp() {
+  // [START authstatelistener]
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.info(user.email+" is signed in!");
 
-//LOG OUT USERS
-//ref.unauth();
+      //PRINT USER INFO
+      // User is signed in.
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var uid = user.uid;
+
+      //HTML BUILD
+      var divContent = "<div class='ms-printRes'>";
+      divContent += "<div class='wrapperInfo ani-show'>";
+      divContent += "<h1>"+displayName+"</h1>";
+      divContent += "<h2>"+email+"<br />uID --> "+uid+"</h2>";
+      divContent += "<h4>Is email V: "+emailVerified+"</h2>";
+      divContent += "</div>";
+      divContent += "<div class='clearfix'></div></div>";
+      document.querySelector(".ms-users-list").innerHTML += divContent;
+      //END HTML BUILD
+
+    } else {
+      // User is signed out.
+      console.warn("User is signed out!");
+    }
+  });
+  // [END authstatelistener]
+}
+window.onload = function() {
+  initApp();
+};
+//END LISTENER AUTH STATE
+
+//EVENTOS INPUT --> DELEGATING <--
+var msInput = document.querySelector('.ms-search-input');
+
+msInput.addEventListener("focusin", function(event){
+
+  //console.log("Focus in!");
+  var elemento = event.target || event.srcElement;
+  elemento.value = "";
+  elemento.placeholder = "";
+
+}, true);
+
+msInput.addEventListener("focusout", function(event){
+
+  //console.log("Focus Out!");
+  var elemento = event.target || event.srcElement;
+  if(elemento.id === "userName") {
+
+    elemento.placeholder = "New user name";
+
+  } else if (elemento.id === "userEmail") {
+
+    elemento.placeholder = "Your email";
+
+  } else {
+
+    elemento.placeholder = "New password";
+
+  }
+
+}, true);
 
 </script>
 
