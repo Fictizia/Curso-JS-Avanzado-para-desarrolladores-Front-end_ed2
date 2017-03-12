@@ -51,6 +51,10 @@ div[class*="ms-"] {width: 100%;margin-bottom: 15px;}
 
 .text-center {text-align: center;}
 .text-right {text-align: right;}
+.text-left {text-align: left;}
+
+.right {float: right;}
+.left {float: left;}
 
 .ms-printRes {
 
@@ -154,6 +158,18 @@ input {
 
 }
 
+.ms-button {
+
+  width: 45% !important;
+ 
+}
+
+#loginGit {
+
+  background: #313131;
+
+}
+
 </style>
 
 </head>
@@ -173,19 +189,25 @@ input {
 
 	  </div>
 
-	  <div class="ms-button main-font text-right">
+    <div class="ms-button main-font text-left left">
+
+        <a class="ms-send-query" id="loginGit">GIT LogIn</a>
+
+    </div>
+
+	  <div class="ms-button main-font text-right right">
 
 	      <a class="ms-send-query" id="login">LOG IN</a>
 
 	  </div>
 
-    <div class="ms-button main-font text-right">
+    <div class="ms-button main-font text-right right">
 
         <a class="ms-send-query" id="logout">LOG OUT</a>
 
     </div>
 
-    <div class="ms-button main-font text-right">
+    <div class="ms-button main-font text-left left">
 
         <a class="ms-send-query" id="createUser">New User</a>
 
@@ -287,6 +309,56 @@ function createUser() {
 document.querySelector("#createUser").addEventListener("click" , createUser);
 //END CREATE USER
 
+//GIT LOGIN
+function loginGit() {
+
+  if (!firebase.auth().currentUser) {
+    // [START createprovider]
+    var provider = new firebase.auth.GithubAuthProvider();
+    // [END createprovider]
+    // [START addscopes]
+    provider.addScope('repo');
+    // [END addscopes]
+    // [START signin]
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // [START_EXCLUDE]
+      document.getElementById('quickstart-oauthtoken').textContent = token;
+      // [END_EXCLUDE]
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // [START_EXCLUDE]
+      if (errorCode === 'auth/account-exists-with-different-credential') {
+        alert('You have already signed up with a different auth provider for that email.');
+        // If you are using multiple auth providers on your app you should handle linking
+        // the user's accounts here.
+      } else {
+        console.error(error);
+      }
+      // [END_EXCLUDE]
+    });
+    // [END signin]
+  } else {
+    // [START signout]
+    firebase.auth().signOut();
+    // [END signout]
+  }
+
+}
+
+//BTN GIT LOGIN
+document.querySelector("#loginGit").addEventListener("click" , loginGit);
+//END GIT LOGIN
+
 /**
  * initApp handles setting up UI event listeners and registering Firebase auth listeners:
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
@@ -305,6 +377,7 @@ function initApp() {
       var email = user.email;
       var emailVerified = user.emailVerified;
       var uid = user.uid;
+      var photoURL = user.photoURL;
 
       //HTML BUILD
       var divContent = "<div class='ms-printRes'>";
@@ -313,7 +386,15 @@ function initApp() {
       divContent += "<h2>"+email+"<br />uID --> "+uid+"</h2>";
       divContent += "<h4>Is email V: "+emailVerified+"</h2>";
       divContent += "</div>";
+
+      if(photoURL !== null || photoURL !== undefined){
+
+        divContent += "<div class=''><img src='"+photoURL+" width='100' /></div>";
+
+      }
+
       divContent += "<div class='clearfix'></div></div>";
+
       document.querySelector(".ms-users-list").innerHTML += divContent;
       //END HTML BUILD
 
