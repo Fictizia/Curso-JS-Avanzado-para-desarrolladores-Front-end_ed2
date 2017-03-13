@@ -391,6 +391,9 @@ function printRes3(valorInput) {
 
     console.info("ValorInp: "+valorInput);
 
+//--> Faltaría valorInput.trim() para eliminar espacios blancos al principio y al final 
+//--> Faltaria encodeURIComponent(valorInput) para convertir el texto en URL de verdad y asegurar que no se rompe.
+
     msAjax("http://www.omdbapi.com/?t="+valorInput, function(movieInfo){
 
         var divContent = "<div class='wrapperInfo'>";
