@@ -239,8 +239,9 @@ function printRes2() {
 
             var self = weatherInfo.list[i];
             divContent += "<li>"
-            divContent += self.weather.main+"<br />";
-            divContent += self.weather.description+"<br />";
+    MAL --> divContent += self.weather.main+"<br />";
+    MAL --> divContent += self.weather.description+"<br />";
+    OK  --> divContent += self.weather[0].description+"<br />";
             divContent += "Date: "+self.dt_txt+"<br />";
             divContent += "Humidity: "+self.main.humidity+"<br />";
             divContent += "Wind: "+self.wind.deg+"<br />";
