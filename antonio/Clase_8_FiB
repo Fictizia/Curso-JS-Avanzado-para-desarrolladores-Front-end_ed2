@@ -202,6 +202,8 @@ function pickupInputs() {
     var useremail = document.getElementById("userEmail").value;
     var userpass = document.getElementById("userPass").value;
 
+    // --> VER VALIDACION FORMS CON HTML5 <--
+
     if(username !== null && username !== undefined && username !== "") {
         
       console.log("Name OK: "+username);
@@ -236,24 +238,20 @@ firebase.initializeApp(config);
 */
 
 // Initialize Firebase --> V2
-var ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
+//var ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
+var users = new Firebase("https://grahovsky-js-auth.firebaseio.com/users");
 
 //Delete All Children
-ref.child("users").remove();
+//users.remove();
 
 //CREAR USUARIO
 function newUser(username,useremail,userpass) {
 
   console.info("Creando User: "+username+" "+useremail+" "+userpass);
-  //APUNTAMOS REF AL NODO QUE QUIERO
-  ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/users");
 
-  //1st Key --> username
-  var createUser = ref.child(username);
+  users.push({
 
-  //2nd Key info
-  createUser.set({
-
+    username : username,
     email: useremail,
     pass: userpass
 
@@ -264,11 +262,10 @@ function newUser(username,useremail,userpass) {
 //PRINT USERS CUANDO CAMBIE LA DDBB
 function printUser() {
 
-  ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
+  users.on("child_added",function(snapshot){
 
-  ref.child("users").on("child_added",function(snapshot){
-
-    var printName = snapshot.key();
+    //var printName = snapshot.key();
+    var printName = snapshot.child("username").val();
     var printEmail = snapshot.child("email").val();
     //console.info("PRINTING: "+printName+" "+printEmail);
 
@@ -290,20 +287,13 @@ printUser();
 function checkUser(username,useremail,userpass) {
 
   console.log("CHECKING!");
-  newUser(username,useremail,userpass);
-  var inputemail = useremail;
 
-  //Buscar User Name
-  /*
-  ref.child("users").orderByKey().equalTo(username).on("child_added", function(snapshot) {
-    
+  users.orderByChild("username").once("child_added", function(snapshot) {
+
     console.log("QUERY!");
-    //var data = snapshot.val();
-    //console.info("Data object: "+JSON.stringify(data));
-    var checkKey = snapshot.key();
-    var checkMail = snapshot.child("email").val();
 
-    console.log(checkMail+"  "+inputemail)
+    var checkKey = snapshot.val().username;
+    var checkMail = snapshot.val().email;
 
     if (checkKey === username) {
 
@@ -324,8 +314,6 @@ function checkUser(username,useremail,userpass) {
     }
 
   });
-  */
-
 }
 
 //EVENTOS INPUT --> DELEGATING <--
