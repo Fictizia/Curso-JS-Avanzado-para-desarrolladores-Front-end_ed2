@@ -29,7 +29,7 @@ function reordenar() {
 
 reordenar();
 
-//2 * Cursos Fictizia
+//2 * Cursos Fictizia --> Faltan las horas que estaban en ".contextualInfo" <--
 /* ====================================================================
 var arrayTitles = document.querySelectorAll("ul#trainingAreasTabs li");
 
@@ -83,7 +83,7 @@ function printSectionCourses(id) {
 
 printCourses();
 
-//3 * Estado lineas de metro
+//3 * Estado lineas de metro --> Falta cuando hay incidencia que cambia ".txt" por ".r" <--
 /* ====================================================================
 
 var allItems = document.querySelectorAll(".circulacion .txt a");
@@ -99,7 +99,8 @@ for(var i=0; i <= itemsArray.length ; i++) {
 
 };
 
-//4 * El mundotoday allimgs to kitten
+//4 * El mundotoday allimgs to kitten --> Mejor hecho --> Recoger width y height de cada imagen
+y hacer la llamada a la web de thumbs pasando esas datos y así se pinta exacta.
 /* ====================================================================
 
 var allItems = document.getElementsByTagName("img");
