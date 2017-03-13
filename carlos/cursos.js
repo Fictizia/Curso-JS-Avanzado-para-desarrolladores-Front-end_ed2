@@ -1,4 +1,4 @@
-var seciones= document.getElementsByTagName("section");
+var secciones= document.getElementsByTagName("section");
 
 
 for (var i = 1; i < 5 ; ++i) {
