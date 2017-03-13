@@ -1,3 +1,16 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>AJAX REQUEST</title>
+  <meta name="description" content="OMDB HACKERS">
+  <meta name="author" content="Grahovsky">
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
 <!--Incluir lib FiB-->
 <!-- V3 -->
 <!--<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>-->
@@ -5,7 +18,209 @@
 <!-- V2 -->
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
+<style type="text/css">
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+
+    transition: all 0.5s ease;
+
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+
+    font-size: 16px;
+}  
+
+div[class*="ms-"] {width: 100%;margin-bottom: 15px;}
+
+.wrapperInfo {
+
+    float: right;
+    /*width: calc(100% - 115px);*/
+    width: 100%;
+    padding: 15px;
+
+}
+
+    .wrapperInfo h1 {margin-bottom: 10px; font-family: 'Lobster', cursive; font-size: 1.2em;}
+
+    .wrapperInfo .extraInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em;}
+
+    .wrapperInfo .plotInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em; color: #bbb;}
+
+.v-aligner {height:100vh;display: -webkit-box;display: -webkit-flex;display: flex;-webkit-box-align: center;-webkit-align-items: center;align-items: center;-webkit-box-pack: center;-webkit-justify-content: center;}
+
+.main-font {font-family: 'Noto Serif', serif;}
+.title-font {font-family: 'Lobster', cursive;}
+
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+
+.ms-printRes {
+
+    margin-bottom: 0 !important;
+
+}
+
+  .ms-users-list .ms-printRes:first-child {border-top: 1px solid #ccc;}
+
+/*ONCE ANIMATION*/
+@-webkit-keyframes anim-intro {
+
+  from {-webkit-transform: scale(0, 0);} 
+  to {-webkit-transform: scale(1, 1);}
+
+}
+@-moz-keyframes anim-intro {
+
+  from {-moz-transform: scale(0, 0);}
+  to {-moz-transform: scale(1, 1);}
+
+}
+@-o-keyframes anim-intro {
+
+  from {-o-transform: scale(0, 0);}
+  to {-o-transform: scale(1, 1);}
+
+}
+@keyframes anim-intro {
+
+  from {transform: scale(0, 0);}
+  to {transform: scale(1, 1);}
+
+}
+
+.ani-show {
+
+  -webkit-animation: anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  -moz-animation:    anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  -o-animation:      anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  animation: anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+
+}
+
+.movieSearcher {
+
+    width: 100%;
+    max-width: 360px;
+    padding: 30px;
+
+}
+
+input {
+
+    width: 100%;
+    padding: 10px 7px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin: 0 auto;
+    margin-bottom: 15px;
+
+}
+
+    input:focus {
+
+        border-color: #019dde;
+        outline: none;
+
+    }
+
+    input:nth-child(3) {margin-bottom: 0px;}
+
+.ms-title {font-size: 2.5em;color:#1c415e;}
+
+.ms-send-query {
+
+    background: #1166aa;
+    display: inline-block;
+    border-radius: 4px;
+    color:white;
+    padding: 7px 10px;
+    text-transform: uppercase;
+
+}
+
+    .ms-send-query:hover {
+
+        background: #019dde;
+        cursor: pointer;
+
+    }
+
+.clearfix {
+
+    width: 100%;
+    clear: both;
+    height: 1px;
+    margin-bottom: -1px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+</style>
+
+</head>
+<body>
+<div class="v-aligner">
+
+  <div class="movieSearcher">
+
+      <div class="ms-title title-font text-center">Crear Usuario</div>
+
+      <div class="ms-search-input main-font">
+
+          <input class="ms-input" type="text" id="userName" placeholder="New user name">
+          <input class="ms-input" type="text" id="userEmail" placeholder="Your email">
+          <input class="ms-input" type="password" id="userPass" placeholder="New password">
+
+      </div>
+
+      <div class="ms-button main-font text-right">
+
+          <a class="ms-send-query">CREAR</a>
+
+      </div>
+
+      <div class="ms-users-list">
+
+
+      </div>
+
+  </div>
+
 <script>
+//RECOGER VALORES De inputs
+document.querySelector(".ms-send-query").addEventListener("click" , pickupInputs);
+
+function pickupInputs() {
+
+    var username = document.getElementById("userName").value;
+    var useremail = document.getElementById("userEmail").value;
+    var userpass = document.getElementById("userPass").value;
+
+    if(username !== null && username !== undefined && username !== "") {
+        
+      console.log("Name OK: "+username);
+
+      if(useremail !== null && useremail !== undefined && useremail !== "") {
+
+        console.log("Email OK: "+useremail);
+
+        if(userpass !== null && userpass !== undefined && userpass !== "") {
+
+          checkUser(username,useremail,userpass)
+
+        }
+
+      }
+
+    } else {console.warn("WRONG INFO FROM INPUT");}
+
+}
 
 //Arrancar la mia
 // Initialize Firebase --> V3
@@ -20,19 +235,131 @@ var config = {
 firebase.initializeApp(config);
 */
 
-// Initialize Firebase --> V3
+// Initialize Firebase --> V2
 var ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
 
-var usersRef = ref.child("users");
-    usersRef.set({
-    alanisawesome: {
-      date_of_birth: "June 23, 1912",
-      full_name: "Alan Turing"
-    },
-    gracehop: {
-      date_of_birth: "December 9, 1906",
-      full_name: "Grace Hopper"
+//Delete All Children
+ref.child("users").remove();
+
+//CREAR USUARIO
+function newUser(username,useremail,userpass) {
+
+  console.info("Creando User: "+username+" "+useremail+" "+userpass);
+  //APUNTAMOS REF AL NODO QUE QUIERO
+  ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/users");
+
+  //1st Key --> username
+  var createUser = ref.child(username);
+
+  //2nd Key info
+  createUser.set({
+
+    email: useremail,
+    pass: userpass
+
+  });
+
+};
+
+//PRINT USERS CUANDO CAMBIE LA DDBB
+function printUser() {
+
+  ref = new Firebase("https://grahovsky-js-auth.firebaseio.com/");
+
+  ref.child("users").on("child_added",function(snapshot){
+
+    var printName = snapshot.key();
+    var printEmail = snapshot.child("email").val();
+    //console.info("PRINTING: "+printName+" "+printEmail);
+
+    var divContent = "<div class='ms-printRes'>";
+    divContent += "<div class='wrapperInfo ani-show'>";
+    divContent += "<h1>"+printName+"</h1>";
+    divContent += "<h3>"+printEmail+"</h3>";
+    divContent += "</div>";
+    divContent += "<div class='clearfix'></div></div>";
+
+    document.querySelector(".ms-users-list").innerHTML += divContent;
+    
+  });
+
+}
+
+printUser();
+
+function checkUser(username,useremail,userpass) {
+
+  console.log("CHECKING!");
+  newUser(username,useremail,userpass);
+  var inputemail = useremail;
+
+  //Buscar User Name
+  /*
+  ref.child("users").orderByKey().equalTo(username).on("child_added", function(snapshot) {
+    
+    console.log("QUERY!");
+    //var data = snapshot.val();
+    //console.info("Data object: "+JSON.stringify(data));
+    var checkKey = snapshot.key();
+    var checkMail = snapshot.child("email").val();
+
+    console.log(checkMail+"  "+inputemail)
+
+    if (checkKey === username) {
+
+        console.warn(" Ese Nombre de usario ya existe, por favor utiliza otro.");
+        return;
+
+    } else if (checkMail === useremail) {
+        
+        console.warn("Ese email de usario ya existe, por favor utiliza otro.");
+        return;
+
+    } else {
+
+      console.info("EXITO");
+      //IF EXITO CREAMOS
+      newUser(username,useremail,userpass);
+
     }
-});
+
+  });
+  */
+
+}
+
+//EVENTOS INPUT --> DELEGATING <--
+var msInput = document.querySelector('.ms-search-input');
+
+msInput.addEventListener("focusin", function(event){
+
+  //console.log("Focus in!");
+  var elemento = event.target || event.srcElement;
+  elemento.value = "";
+  elemento.placeholder = "";
+
+}, true);
+
+msInput.addEventListener("focusout", function(event){
+
+  //console.log("Focus Out!");
+  var elemento = event.target || event.srcElement;
+  if(elemento.id === "userName") {
+
+    elemento.placeholder = "New user name";
+
+  } else if (elemento.id === "userEmail") {
+
+    elemento.placeholder = "Your email";
+
+  } else {
+
+    elemento.placeholder = "New password";
+
+  }
+
+}, true);
 
 </script>
+
+</body>

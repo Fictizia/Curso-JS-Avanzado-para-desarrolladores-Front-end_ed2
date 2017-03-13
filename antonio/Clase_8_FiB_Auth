@@ -1,0 +1,447 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>AJAX REQUEST</title>
+  <meta name="description" content="OMDB HACKERS">
+  <meta name="author" content="Grahovsky">
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+<style type="text/css">
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+
+    transition: all 0.5s ease;
+
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+
+    font-size: 16px;
+}  
+
+div[class*="ms-"] {width: 100%;margin-bottom: 15px;}
+
+.wrapperInfo {
+
+    float: right;
+    /*width: calc(100% - 115px);*/
+    width: 100%;
+    padding: 15px;
+
+}
+
+    .wrapperInfo h1 {margin-bottom: 10px; font-family: 'Lobster', cursive; font-size: 1.2em;}
+
+    .wrapperInfo .extraInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em;}
+
+    .wrapperInfo .plotInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em; color: #bbb;}
+
+.v-aligner {height:100vh;display: -webkit-box;display: -webkit-flex;display: flex;-webkit-box-align: center;-webkit-align-items: center;align-items: center;-webkit-box-pack: center;-webkit-justify-content: center;}
+
+.main-font {font-family: 'Noto Serif', serif;}
+.title-font {font-family: 'Lobster', cursive;}
+
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+.text-left {text-align: left;}
+
+.right {float: right;}
+.left {float: left;}
+
+.ms-printRes {
+
+    margin-bottom: 0 !important;
+
+}
+
+  .ms-users-list .ms-printRes:first-child {border-top: 1px solid #ccc;}
+
+/*ONCE ANIMATION*/
+@-webkit-keyframes anim-intro {
+
+  from {-webkit-transform: scale(0, 0);} 
+  to {-webkit-transform: scale(1, 1);}
+
+}
+@-moz-keyframes anim-intro {
+
+  from {-moz-transform: scale(0, 0);}
+  to {-moz-transform: scale(1, 1);}
+
+}
+@-o-keyframes anim-intro {
+
+  from {-o-transform: scale(0, 0);}
+  to {-o-transform: scale(1, 1);}
+
+}
+@keyframes anim-intro {
+
+  from {transform: scale(0, 0);}
+  to {transform: scale(1, 1);}
+
+}
+
+.ani-show {
+
+  -webkit-animation: anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  -moz-animation:    anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  -o-animation:      anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+  animation: anim-intro .3s cubic-bezier(0.53, 0.01, 0.2, 1) !important;
+
+}
+
+.movieSearcher {
+
+    width: 100%;
+    max-width: 360px;
+    padding: 30px;
+
+}
+
+input {
+
+    width: 100%;
+    padding: 10px 7px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin: 0 auto;
+    margin-bottom: 15px;
+
+}
+
+    input:focus {
+
+        border-color: #019dde;
+        outline: none;
+
+    }
+
+    input:nth-child(3) {margin-bottom: 0px;}
+
+.ms-title {font-size: 2.5em;color:#1c415e;}
+
+.ms-send-query {
+
+    background: #1166aa;
+    display: inline-block;
+    border-radius: 4px;
+    color:white;
+    padding: 7px 10px;
+    text-transform: uppercase;
+
+}
+
+    .ms-send-query:hover {
+
+        background: #019dde;
+        cursor: pointer;
+
+    }
+
+.clearfix {
+
+    width: 100%;
+    clear: both;
+    height: 1px;
+    margin-bottom: -1px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.ms-button {
+
+  width: 45% !important;
+ 
+}
+
+#loginGit {
+
+  background: #313131;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="v-aligner">
+
+	<div class="movieSearcher">
+
+	  <div class="ms-title title-font text-center">Crear Usuario</div>
+
+	  <div class="ms-search-input main-font">
+
+	      <input class="ms-input" type="text" id="userEmail" placeholder="Your email">
+	      <input class="ms-input" type="password" id="userPass" placeholder="New password">
+
+	  </div>
+
+    <div class="ms-button main-font text-left left">
+
+        <a class="ms-send-query" id="loginGit">GIT LogIn</a>
+
+    </div>
+
+	  <div class="ms-button main-font text-right right">
+
+	      <a class="ms-send-query" id="login">LOG IN</a>
+
+	  </div>
+
+    <div class="ms-button main-font text-right right">
+
+        <a class="ms-send-query" id="logout">LOG OUT</a>
+
+    </div>
+
+    <div class="ms-button main-font text-left left">
+
+        <a class="ms-send-query" id="createUser">New User</a>
+
+    </div>
+
+	  <div class="ms-users-list">
+
+
+	  </div>
+
+	</div>
+
+</div>
+
+<!--Incluir lib FiB-->
+<!-- V3 -->
+<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>-->
+
+<script>
+	
+//var ref = new Firebase("https://grahovsky-js-auth.firebaseio.com");
+var config = {
+  apiKey: "AIzaSyBce7z20_LG94V7rnnzWJltHGCeFl0Sah8",
+  authDomain: "grahovsky-js-auth.firebaseapp.com",
+  databaseURL: "https://grahovsky-js-auth.firebaseio.com",
+  storageBucket: "grahovsky-js-auth.appspot.com",
+  messagingSenderId: "1092272135393"
+};
+
+firebase.initializeApp(config);
+
+// AUTH VIA EMAIL AND PASSWORD
+function logIn(email,password) {
+
+  var email = document.getElementById("userEmail").value;
+  var password = document.getElementById("userPass").value;
+
+  // Sign in with email and pass.
+  firebase.auth().signInWithEmailAndPassword(email,password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+    } else {
+      console.warn(errorMessage);
+    }
+    console.log("f login --> "+error);
+  });
+
+};
+
+//USER TEST --> "charlottehl@gmail.com"  "123456"
+//BTN LOG IN
+document.querySelector("#login").addEventListener("click" , logIn);
+//END LOG IN USER
+
+//LOG OUT USER 
+function logOut() {
+
+   if (firebase.auth().currentUser) {
+      // [START signout]
+      firebase.auth().signOut();
+      // [END signout]
+    } else {
+      console.warn("f logOut --> No hay ningún usuario logeado");
+    }
+};
+
+//BTN LOG OUT
+document.querySelector("#logout").addEventListener("click" , logOut);
+//END LOG OUT USER
+
+//CREATE USER
+function createUser() {
+
+  var email = document.getElementById("userEmail").value;
+  var password = document.getElementById("userPass").value;
+
+  // Sign in with email and pass.
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    if (errorCode == 'auth/weak-password') {
+      alert('The password is too weak.');
+    } else {
+      console.warn(errorMessage);
+    }
+    //SI EL EMAIL ES EL MISMO NO TE DEJA!!!
+    console.log("f createUser --> "+error);
+  });
+
+}
+//BTN CREATE USER
+document.querySelector("#createUser").addEventListener("click" , createUser);
+//END CREATE USER
+
+//GIT LOGIN
+function loginGit() {
+
+  if (!firebase.auth().currentUser) {
+    // [START createprovider]
+    var provider = new firebase.auth.GithubAuthProvider();
+    // [END createprovider]
+    // [START addscopes]
+    provider.addScope('repo');
+    // [END addscopes]
+    // [START signin]
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // [START_EXCLUDE]
+      document.getElementById('quickstart-oauthtoken').textContent = token;
+      // [END_EXCLUDE]
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // [START_EXCLUDE]
+      if (errorCode === 'auth/account-exists-with-different-credential') {
+        alert('You have already signed up with a different auth provider for that email.');
+        // If you are using multiple auth providers on your app you should handle linking
+        // the user's accounts here.
+      } else {
+        console.error(error);
+      }
+      // [END_EXCLUDE]
+    });
+    // [END signin]
+  } else {
+    // [START signout]
+    firebase.auth().signOut();
+    // [END signout]
+  }
+
+}
+
+//BTN GIT LOGIN
+document.querySelector("#loginGit").addEventListener("click" , loginGit);
+//END GIT LOGIN
+
+/**
+ * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+ *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+ *    out, and that is where we update the UI.
+ */
+function initApp() {
+  // [START authstatelistener]
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.info(user.email+" is signed in!");
+
+      //PRINT USER INFO
+      // User is signed in.
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var uid = user.uid;
+      var photoURL = user.photoURL;
+
+      //HTML BUILD
+      var divContent = "<div class='ms-printRes'>";
+      divContent += "<div class='wrapperInfo ani-show'>";
+      divContent += "<h1>"+displayName+"</h1>";
+      divContent += "<h2>"+email+"<br />uID --> "+uid+"</h2>";
+      divContent += "<h4>Is email V: "+emailVerified+"</h2>";
+      divContent += "</div>";
+
+      if(photoURL !== null || photoURL !== undefined){
+
+        divContent += "<div class=''><img src='"+photoURL+" width='100' /></div>";
+
+      }
+
+      divContent += "<div class='clearfix'></div></div>";
+
+      document.querySelector(".ms-users-list").innerHTML += divContent;
+      //END HTML BUILD
+
+    } else {
+      // User is signed out.
+      console.warn("User is signed out!");
+    }
+  });
+  // [END authstatelistener]
+}
+window.onload = function() {
+  initApp();
+};
+//END LISTENER AUTH STATE
+
+//EVENTOS INPUT --> DELEGATING <--
+var msInput = document.querySelector('.ms-search-input');
+
+msInput.addEventListener("focusin", function(event){
+
+  //console.log("Focus in!");
+  var elemento = event.target || event.srcElement;
+  elemento.value = "";
+  elemento.placeholder = "";
+
+}, true);
+
+msInput.addEventListener("focusout", function(event){
+
+  //console.log("Focus Out!");
+  var elemento = event.target || event.srcElement;
+  if(elemento.id === "userName") {
+
+    elemento.placeholder = "New user name";
+
+  } else if (elemento.id === "userEmail") {
+
+    elemento.placeholder = "Your email";
+
+  } else {
+
+    elemento.placeholder = "New password";
+
+  }
+
+}, true);
+
+</script>
+
+</body>

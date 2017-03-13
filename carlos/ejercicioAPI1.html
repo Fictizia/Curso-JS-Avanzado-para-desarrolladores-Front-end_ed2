@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de API OMDB</title>
+</head>
+<body>
+    <h1>Consulta OMDB</h1>    
+
+
+<form>
+Película: <input type="text" name="peli" /><br><br>
+<input type="button" onclick="peticionAjax(urlbase+this.form.peli.value)" value="BUSCAR" />
+</form>
+  
+<div id="consola"></div>
+
+<script>
+var urlbase="http://omdbapi.com/?t=";
+
+function peticionAjax(url) {
+  console.log(url);
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function() {
+
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                console.info(JSON.parse(xmlHttp.responseText));
+                showResult(JSON.parse(xmlHttp.responseText));
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+                console.error("ERROR! 404");
+                console.info(JSON.parse(xmlHttp.responseText));
+            }
+        };
+        xmlHttp.open("GET", url, true);
+        // Modificación de cabeceras
+        xmlHttp.send();
+    }
+
+   // peticionAjax("http://omdbapi.com/?t=hackers");
+
+function showResult(obj){
+var datos=
+    "Título: "+obj.Title+"<br>"+
+    "Fecha: "+obj.Released+"<br>"+
+    "Director: "+obj.Director+"<br>"+
+    "Género: "+obj.Genre+"<br>"+
+    "Reparto:"+obj.Actors+"<br>"+
+    "Pais:"+obj.Country+"<br>"+
+    "Argumento:"+obj.Plot+"<br>";
+  
+document.getElementById("consola").innerHTML=datos;
+}
+
+</script>

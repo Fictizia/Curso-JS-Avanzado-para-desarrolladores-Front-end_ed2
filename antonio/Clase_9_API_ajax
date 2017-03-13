@@ -8,26 +8,189 @@
   <meta name="description" content="OMDB HACKERS">
   <meta name="author" content="Grahovsky">
 
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+<style type="text/css">
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+
+    transition: all 0.5s ease;
+
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+
+    font-size: 16px;
+}  
+
+.wrapperInfo {
+
+    float: right;
+    width: calc(100% - 115px);
+
+}
+
+    .wrapperInfo h1 {margin-bottom: 10px; font-family: 'Lobster', cursive; font-size: 1.2em;}
+
+    .wrapperInfo .extraInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em;}
+
+    .wrapperInfo .plotInfo {margin-bottom: 10px; font-family: 'Noto Serif', serif; font-size: 0.8em; color: #bbb;}
+
+.v-aligner {height:100vh;display: -webkit-box;display: -webkit-flex;display: flex;-webkit-box-align: center;-webkit-align-items: center;align-items: center;-webkit-box-pack: center;-webkit-justify-content: center;}
+
+.main-font {font-family: 'Noto Serif', serif;}
+.title-font {font-family: 'Lobster', cursive;}
+
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+
+.ms-printRes {
+
+    padding: 30px 0 15px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    -ms-transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0);
+
+    -webkit-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    -moz-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    -o-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+
+}
+
+.ani-show {
+
+    -ms-transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+
+    -webkit-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    -moz-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    -o-transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+    transition: transform 0.5s cubic-bezier(1, -0.5, 0.5, 1);
+
+}
+
+.movieSearcher {
+
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+
+}
+
+div[class*="ms-"] {width: 100%;margin-bottom: 30px;}
+
+input {
+
+    width: 100%;
+    padding: 10px 7px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+
+}
+
+    input:focus {
+
+        border-color: #019dde;
+        outline: none;
+
+    }
+
+.ms-title {font-size: 2.5em;color:#1c415e;}
+
+.ms-send-query {
+
+    background: #1166aa;
+    display: inline-block;
+    border-radius: 4px;
+    color:white;
+    padding: 7px 10px;
+    text-transform: uppercase;
+
+}
+
+    .ms-send-query:hover {
+
+        background: #019dde;
+        cursor: pointer;
+
+    }
+
+.clearfix {
+
+    width: 100%;
+    clear: both;
+    height: 1px;
+    margin-bottom: -1px;
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="printRes">
+
+
+</div>
+<!--
+<div class="v-aligner">
+
+    <div class="movieSearcher">
+
+        <div class="ms-title title-font text-center">¿De qué peli hablamos?</div>
+
+        <div class="ms-search-input main-font">
+
+            <input type="text" id="userSearch" placeholder="Título aquí pleaze">
+
+        </div>
+
+        <div class="ms-button title-font text-right">
+
+            <a class="ms-send-query">Dime Argo</a>
+
+        </div>
+
+        <div class="ms-printRes">
+
+
+        </div>
+
+    </div>
+
+</div>
+-->
 <script>
 
 //1 *
 function printRes() {
 
-	console.info("START");
-	//peticionAjax(URL , CALLBACK);
-	callingAjax("http://www.omdbapi.com/?t=Hackers", function(movieInfo){
+    console.info("START");
+    //peticionAjax(URL , CALLBACK);
+    callingAjax("http://www.omdbapi.com/?t=Hackers", function(movieInfo){
 
-		//console.log("YESS");
-		var divContent = "<h1>"+movieInfo.Title+" <span class='year'>"+movieInfo.Year+"</span></h1>";
-		divContent += "<div class='extraInfo'><span class=''>Rated:</span> "+movieInfo.Rated;
-		divContent += "<span class=''>Released:</span> "+movieInfo.Released;
-		divContent += "<span class=''>Runtime:</span> "+movieInfo.Runtime;
-		divContent += "</div>";
-		divContent += "<div class='plotInfo'>"+movieInfo.Plot+"</div>";
-		divContent += "<div class='posterImg'><img src="+movieInfo.Poster+" width='100' /></div>";
-		document.querySelector(".printRes").innerHTML = divContent;
+        //console.log("YESS");
+        var divContent = "<h1>"+movieInfo.Title+" <span class='year'>"+movieInfo.Year+"</span></h1>";
+        divContent += "<div class='extraInfo'><span class=''>Rated:</span> "+movieInfo.Rated;
+        divContent += "<span class=''>Released:</span> "+movieInfo.Released;
+        divContent += "<span class=''>Runtime:</span> "+movieInfo.Runtime;
+        divContent += "</div>";
+        divContent += "<div class='plotInfo'>"+movieInfo.Plot+"</div>";
+        divContent += "<div class='posterImg'><img src="+movieInfo.Poster+" width='100' /></div>";
+        document.querySelector(".printRes").innerHTML = divContent;
 
-	});
+    });
 
 }
 
@@ -65,15 +228,32 @@ var myUrlAPI = "http://api.openweathermap.org/data/2.5/forecast/city?id=3117732&
 
 function printRes2() {
 
-	console.info("START");
-	//peticionAjax(URL , CALLBACK);
-	callingAjax(myUrlAPI, function(weatherInfo){
+    console.info("START");
+    callingAjax(myUrlAPI, function(weatherInfo){
 
-		//console.log("YESS");
-		var divContent = weatherInfo;
-		document.querySelector(".printRes").innerHTML = divContent;
+        var divContent = "<h1>"+weatherInfo.city.name+" <span>"+weatherInfo.city.country+"</span></h1>";
 
-	});
+        divContent += "<div class='weatherList'><ul>";
+        
+        for(var i in weatherInfo.list) {
+
+            var self = weatherInfo.list[i];
+            divContent += "<li>"
+            divContent += self.weather.main+"<br />";
+            divContent += self.weather.description+"<br />";
+            divContent += "Date: "+self.dt_txt+"<br />";
+            divContent += "Humidity: "+self.main.humidity+"<br />";
+            divContent += "Wind: "+self.wind.deg+"<br />";
+            divContent += "</li>";
+
+        }
+
+        divContent += "</ul></div>";
+        divContent += "<div class='clearfix' style='height:10px;padding:5px 0;background:#ccc'></div>";
+
+        document.querySelector(".printRes").innerHTML = divContent;
+
+    });
 
 }
 
@@ -83,18 +263,55 @@ function callingAjax(url,callback) {
 
     xmlHttp.onreadystatechange = function() {
 
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        //if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        if (xmlHttp.readyState === 4) {
+
+            if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
 
             console.info(JSON.parse(xmlHttp.responseText));
-            /*
             var weatherInfo = JSON.parse(xmlHttp.responseText);
-            callback(weatherInfo);
-            */
+            localStorage.setItem('myStorage', JSON.stringify(xmlHttp.responseText));
 
-        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+                if(weatherInfo.message !== "Error") {
 
-            console.error("ERROR! 404");
-            console.warn(JSON.parse(xmlHttp.responseText));
+                    callback(weatherInfo);
+
+                } else {
+
+                    console.warn("Free API calls limit reached.\n In the meantime we'll use our fallback info!");
+                    
+                    var fallbackInfo = JSON.parse(localStorage.getItem('myStorage'));
+                    var divContent = "<h1>"+fallbackInfo.city.name+" <span>"+fallbackInfo.city.country+"</span></h1>";
+
+                    divContent += "<div class='weatherList'><ul>";
+                    
+                    for(var i in fallbackInfo.list) {
+
+                        var self = fallbackInfo.list[i];
+                        divContent += "<li>"
+                        divContent += self.weather.main+"<br />";
+                        divContent += self.weather.description+"<br />";
+                        divContent += "Date: "+self.dt_txt+"<br />";
+                        divContent += "Humidity: "+self.main.humidity+"<br />";
+                        divContent += "Wind: "+self.wind.deg+"<br />";
+                        divContent += "</li>";
+
+                    }
+
+                    divContent += "</ul></div>";
+                    divContent += "<div class='clearfix' style='height:10px;padding:5px 0;background:#ccc'></div>";
+
+                    document.querySelector(".printRes").innerHTML = divContent;
+
+                }
+                
+            } else if (xmlHttp.status >= 400 && xmlHttp.status <= 600) {
+
+                var error = xmlHttp.status;
+                console.error("ERROR! :"+error);
+                console.warn(JSON.parse(xmlHttp.responseText));
+
+            }
 
         }
     };
@@ -105,14 +322,98 @@ function callingAjax(url,callback) {
 printRes2();
 //END 2 *
 
+//3 *
+
+//3.1 recoger el valor del input cuando clicken el boton --> limpiar input al terminar
+    //if empty --> mensaje error
+document.querySelector(".ms-send-query").addEventListener("click" , pickupInput);
+
+function pickupInput() {
+
+    var userSearch = document.getElementById("userSearch").value;
+
+    if(userSearch !== null && userSearch !== undefined && userSearch !== "") {
+        
+        //console.log(userSearch);
+        printRes3(userSearch);
+
+    } else {console.warn("WRONG INFO FROM INPUT");}
+
+}
+
+//EVENTOS INPUT
+var msInput = document.getElementById("userSearch");
+
+msInput.addEventListener("focusin", function(){
+
+    //console.log("Focus in!");
+    msInput.value = "";
+    msInput.placeholder = "";
+
+});
+
+msInput.addEventListener("focusout", function(){
+
+    //console.log("Focus!");
+    msInput.placeholder = "Título aquí pleaze";
+
+});
+
+//3.2 llamada ajax a OMDB con la variable que me han pasado como title --> "http://www.omdbapi.com/?t="+varInput
+function msAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+
+        if (xmlHttp.readyState === 4) {
+
+            if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
+
+                //console.info(JSON.parse(xmlHttp.responseText));
+                var movieInfo = JSON.parse(xmlHttp.responseText);
+                callback(movieInfo);
+
+            } else if (xmlHttp.status >= 400 && xmlHttp.status <= 600) {
+
+                console.error("ERROR! 404");
+                console.warn(JSON.parse(xmlHttp.responseText));
+
+            }
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+//3.3 print Resultados
+function printRes3(valorInput) {
+
+    console.info("ValorInp: "+valorInput);
+
+    msAjax("http://www.omdbapi.com/?t="+valorInput, function(movieInfo){
+
+        var divContent = "<div class='wrapperInfo'>";
+        divContent += "<h1>"+movieInfo.Title+" <span class='year'>"+movieInfo.Year+"</span></h1>";
+        divContent += "<div class='extraInfo'><span class=''>"+movieInfo.Rated+" - </span>";
+        divContent += " <span class=''>"+movieInfo.Released+", </span>";
+        divContent += "<span class=''>"+movieInfo.Runtime+"</span>";
+        divContent += "</div>";
+        divContent += "<div class='plotInfo'>"+movieInfo.Plot+"</div>";
+        divContent += "</div>";
+        divContent += "<div class='posterImg'><img src="+movieInfo.Poster+" width='100' /></div>";
+        divContent += "<div class='clearfix'></div>";
+
+        document.querySelector(".ms-printRes").innerHTML = divContent;
+
+        document.querySelector(".ms-printRes").classList.add("ani-show");
+
+    });
+
+}
+
+//END 3 *
+
 </script>
-
-</head>
-<body>
-
-<div class="printRes">
-
-
-</div>
 
 </body>
