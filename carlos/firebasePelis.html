@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de API OMDB</title>
+</head>
+<body>
+    <h1>Consulta OMDB</h1>    
+
+
+<form>
+Película: <input type="text" name="peli" /><br><br>
+<input type="button" onclick="peticionAjax(urlbase+this.form.peli.value)" value="BUSCAR" />
+</form>
+  
+<div id="consola"></div>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+
+<script>
+
+/////////////////////////////////////////////////////////////////////////////////
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBmL5Nmp10_m-MrihzCVKI6jVXA5IUXoT0",
+    authDomain: "prueba1-ca931.firebaseapp.com",
+    databaseURL: "https://prueba1-ca931.firebaseio.com",
+    storageBucket: "prueba1-ca931.appspot.com",
+    messagingSenderId: "991189730067"
+  };
+  firebase.initializeApp(config);
+    // accedo al servicio de trabajo con la base de datos en tiempo real
+    var databaseService = firebase.database();
+
+    firebase.auth().signInWithEmailAndPassword("info@creawebtv.com","kktua1234");
+    
+    
+///////////////////////////////////////////////////////////////////////////////////
+
+
+var urlbase="http://omdbapi.com/?t=";
+
+
+function peticionAjax(url) {
+  console.log(url);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                var respuesta=JSON.parse(xmlHttp.responseText)
+                console.info(respuesta);
+                showResult(respuesta);
+                writePeliDB(respuesta);
+            } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+                console.error("ERROR! 404");
+                console.info(JSON.parse(xmlHttp.responseText));
+            }
+        };
+        xmlHttp.open("GET", url, true);
+        // Modificación de cabeceras
+        xmlHttp.send();
+    }
+   // peticionAjax("http://omdbapi.com/?t=hackers");
+function showResult(obj){
+var datos=
+    "Título: "+obj.Title+"<br>"+
+    "Fecha: "+obj.Released+"<br>"+
+    "Director: "+obj.Director+"<br>"+
+    "Género: "+obj.Genre+"<br>"+
+    "Reparto:"+obj.Actors+"<br>"+
+    "Pais:"+obj.Country+"<br>"+
+    "Argumento:"+obj.Plot+"<br>";
+  
+document.getElementById("consola").innerHTML=datos;
+}
+
+function writePeliDB(obj){
+    var pelis = databaseService.ref('pelis');
+       pelis.push({
+        titulo: obj.Title,
+        fecha: obj.Released,
+        director: obj.Director
+    })
+
+
+}
+
+
+</script>
