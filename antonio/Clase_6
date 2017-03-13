@@ -7,7 +7,7 @@ var allItems = document.querySelectorAll("ul#teachersList > li");
 var itemsArray = Array.prototype.slice.call(allItems);
 
 function compare(a,b) {
-	// --> MAL LA COMPARACIÓN <--
+	// --> Esta está MAL LA COMPARACIÓN <--
 	//a.innerText.localeCompare(b.innerText);
 	//FALTABA EL RETURNNNN --> 1, -1 o 0
 	return a.innerText.localeCompare(b.innerText);	
