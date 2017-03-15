@@ -1,0 +1,44 @@
+## Ejercicio 1
+
+https://codepen.io/grahovsky/pen/peWEwj
+
+if ("geolocation" in navigator) {
+  console.log("DENTRO IF");
+
+  // WATCH --> en mobile ok <--
+  /*
+  options = {
+    enableHighAccuracy: false,
+    timeout: 500,
+    maximumAge: 0
+  };
+
+  navigator.geolocation.watchPosition(success, error, options);
+  */
+  // --> END WATCH
+  
+  // SOLO POSICION 
+  navigator.geolocation.getCurrentPosition(success, error);
+  // END SOLO POSICION
+
+  //CALLBACKS EXITO Y ERRORES
+  function success(user) {
+    var pos = user.coords;
+    console.warn(pos)
+    document.getElementById('printRes').innerHTML = "Lat: "+pos.latitude+" Long: "+pos.longitude;
+  }
+  
+  function error(error) {
+    
+    console.warn("Error code:",error.message)
+    document.getElementById('printRes').innerHTML = "Error Code "+error.code+" <br />"+error.message;
+    
+  }
+  
+} else {
+  console.warn("Geolocation no soportado :-( ");
+}
+
+## END EJERCICIO 1
+
+## Ejercicio 2
