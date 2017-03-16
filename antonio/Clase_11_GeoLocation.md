@@ -41,7 +41,7 @@ if ("geolocation" in navigator) {
 
 ## END EJERCICIO 1
 
-## Ejercicio 2
+# Ejercicio 2
 
 ### Live > http://codepen.io/grahovsky/pen/mWBWxa
 
@@ -434,3 +434,5 @@ function callingAjax(url,callback) {
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBce7z20_LG94V7rnnzWJltHGCeFl0Sah8&callback=initMap">
   
 </script>
+
+## END EJERCICIO 2
