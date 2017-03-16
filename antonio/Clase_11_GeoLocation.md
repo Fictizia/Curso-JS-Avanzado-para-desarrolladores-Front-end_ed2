@@ -3,16 +3,18 @@
 ### Live > https://codepen.io/grahovsky/pen/peWEwj
 
 if ("geolocation" in navigator) {
-  console.log("DENTRO IF");
 
+  console.log("DENTRO IF");
   // WATCH --> en mobile ok <--
+  
+  
   /*
   options = {
     enableHighAccuracy: false,
     timeout: 500,
     maximumAge: 0
   };
-
+  
   navigator.geolocation.watchPosition(success, error, options);
   */
   // --> END WATCH
