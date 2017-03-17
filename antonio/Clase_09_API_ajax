@@ -238,11 +238,11 @@ function printRes2() {
         for(var i in weatherInfo.list) {
 
             var self = weatherInfo.list[i];
-            divContent += "<li>"
-    MAL --> divContent += self.weather.main+"<br />";
-    MAL --> divContent += self.weather.description+"<br />";
-    OK  --> divContent += self.weather[0].description+"<br />";
+            divContent += "<li>";
+            divContent += "============================<br />";
             divContent += "Date: "+self.dt_txt+"<br />";
+            divContent += self.weather[0].description+"<br />";
+            divContent += self.weather[0].main+"<br />";
             divContent += "Humidity: "+self.main.humidity+"<br />";
             divContent += "Wind: "+self.wind.deg+"<br />";
             divContent += "</li>";
@@ -259,19 +259,20 @@ function printRes2() {
 }
 
 function callingAjax(url,callback) {
-
+    
     var xmlHttp = new XMLHttpRequest();
 
     xmlHttp.onreadystatechange = function() {
-
-        //if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        
         if (xmlHttp.readyState === 4) {
 
             if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
 
             console.info(JSON.parse(xmlHttp.responseText));
             var weatherInfo = JSON.parse(xmlHttp.responseText);
-            localStorage.setItem('myStorage', JSON.stringify(xmlHttp.responseText));
+            // BEWARE EL RESPONSE YA LLEGA EN STRING!!! No volver a hacer stringify!!!
+            // MAL --> localStorage.setItem('myStorage', JSON.stringify(xmlHttp.responseText));
+            localStorage.setItem('myStorage', xmlHttp.responseText);
 
                 if(weatherInfo.message !== "Error") {
 
@@ -279,9 +280,11 @@ function callingAjax(url,callback) {
 
                 } else {
 
-                    console.warn("Free API calls limit reached.\n In the meantime we'll use our fallback info!");
-                    
+                    console.warn("Free API calls limit reached.\n In the meantime we'll use our fallback info!");                    
                     var fallbackInfo = JSON.parse(localStorage.getItem('myStorage'));
+
+                    console.info(fallbackInfo);
+                    
                     var divContent = "<h1>"+fallbackInfo.city.name+" <span>"+fallbackInfo.city.country+"</span></h1>";
 
                     divContent += "<div class='weatherList'><ul>";
@@ -289,10 +292,11 @@ function callingAjax(url,callback) {
                     for(var i in fallbackInfo.list) {
 
                         var self = fallbackInfo.list[i];
-                        divContent += "<li>"
-                        divContent += self.weather.main+"<br />";
-                        divContent += self.weather.description+"<br />";
+                        divContent += "<li>";
+                        divContent += "============================<br />";
                         divContent += "Date: "+self.dt_txt+"<br />";
+                        divContent += self.weather[0].description+"<br />";
+                        divContent += self.weather[0].main+"<br />";
                         divContent += "Humidity: "+self.main.humidity+"<br />";
                         divContent += "Wind: "+self.wind.deg+"<br />";
                         divContent += "</li>";
@@ -315,9 +319,11 @@ function callingAjax(url,callback) {
             }
 
         }
+        
     };
     xmlHttp.open("GET", url, true);
     xmlHttp.send();
+
 };
 
 printRes2();
