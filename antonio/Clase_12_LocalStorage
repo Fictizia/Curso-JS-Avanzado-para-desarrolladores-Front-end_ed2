@@ -1,0 +1,106 @@
+//LIVE EN CODEPEN
+https://codepen.io/grahovsky/pen/wJPZVb
+
+//RECOGER VALORES De inputs
+document.querySelector(".save").addEventListener("click" , pickupInputs);
+function pickupInputs() {  
+    var username = document.getElementById("userName").value;
+    var userphone = document.getElementById("userPhone").value;
+    var usermail = document.getElementById("userMail").value;
+    saveUser(username,userphone,usermail);
+}
+
+//SAVE USER
+
+//Contador para generar IDs
+var contador = 0;
+
+function saveUser(user,phone,email) {
+  
+    if (window.localStorage) {
+      var userId = "userID"+(contador);
+      var newContact = {
+        name: user,
+        phone: phone,
+        email: email,
+        avatar: "https://api.adorable.io/avatars/50/"+email+".png"
+      }
+      //USAMOS stringify para convertir objeto en string y poder guardar clave : valor y generar Diferentes Claves --> Ids
+      localStorage.setItem(userId, JSON.stringify(newContact));
+      console.log("SAVING New Contact ID: "+userId+" "+localStorage.getItem(userId));
+      //SUMANDO IDs
+      contador += 1;
+      var userInfo = localStorage.getItem(userId);
+      printRes(userInfo,userId); 
+      
+    } else {
+        console.warn('Su navegador no soporta localStorage');
+    }
+  
+}
+
+function printRes(userInfo,id) {
+  var print = "";
+  if(localStorage.length === 0) {
+    console.warn("EMPTY STORAGE");
+  } else {
+    var userInfo = JSON.parse(userInfo);
+    print += "<li data-id='"+id+"' class='contactItem'>";
+    print += "<p>u. "+userInfo.name+"</p>";
+    print += "<p>p. "+userInfo.phone+"</p>";
+    print += "<p>e. "+userInfo.email+"</p>";
+    print += "<img src="+userInfo.avatar+" />";
+    print += "<div id="+id+" class='deleteItem'>X</div>";
+    print += "</li>";
+    //PRINTING UL
+    document.querySelector(".contact-list ul").innerHTML += print;
+    deleteItem();
+  }
+}
+
+//DELETE ALL
+document.querySelector(".delete").addEventListener("click" , deleteAll);
+function deleteAll() {
+  console.warn("Borrando All!");
+  localStorage.clear();
+  document.querySelector(".contact-list ul").innerHTML = "";
+}
+
+//DELETE ITEM on click
+function deleteItem() {
+  
+  var itemsList = document.querySelectorAll(".deleteItem");
+  
+  for(var i = 0; i <= itemsList.length - 1; i++) {
+    var trigger = itemsList[i];
+    trigger.addEventListener("click" , function(event){
+      var idTarget = this.getAttribute("id");
+      document.querySelector("[data-id="+idTarget+"]").outerHTML = "";
+      localStorage.removeItem(idTarget); 
+      console.log("ID delete: "+idTarget);
+    });
+  }
+  
+}
+
+//CARGAR AGENDA SI EXISTE
+function agenda() {
+  console.log("Checking Local Storage");
+  if(localStorage.length > 0) {
+    contador = localStorage.length;
+    console.info("HAY "+contador+" CONTACTOS!");
+    //¿Por que localStorage -1 ???? --> Para evitar el null null??
+    for (var i = 0; i <= contador-1; i++) {
+      var id = localStorage.key(i);
+      var userInfo = localStorage.getItem(id);
+      printRes(userInfo,id);
+    }
+    return 1;
+    deleteItem();
+  } else {
+      console.info("La agenda está vacía");
+      return 0;
+    }
+}
+
+agenda();
