@@ -137,8 +137,7 @@ socket.close(); // Si quieres reabrir. -> socket.connect();
 - Las peliculas pueden ser eliminadas.
 - Las peliculas pueden ser editadas desde el html. 
 
-```javascript
-	// Tu solución
-```
-
+**Socución**
+- Basado en [Getting Started with Firebase by The Jackal of JavaScript](http://thejackalofjavascript.com/getting-started-with-firebase), [código](https://github.com/arvindr21/movieFire/tree/master/jsFire) 
+- [Codepen](http://codepen.io/ulisesgascon/pen/966d4687dc8a2e6ef5f8849a95dc35df)
 
