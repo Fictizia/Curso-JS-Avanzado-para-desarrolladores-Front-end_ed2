@@ -454,10 +454,7 @@ function initMap() {
 
 **1 -** Utiliza Google Maps para posicionar al usuario.
 
-
-```javascript
-	// Tu solución
-```
+- [Solucion](https://codepen.io/ulisesgascon/pen/637fc481e9258728635361a369061e1c)
 
 **2 -** Posiciona todos los vehículos de transporte (trenes y autorbuses) de Los Angeles en el mapa.
 
