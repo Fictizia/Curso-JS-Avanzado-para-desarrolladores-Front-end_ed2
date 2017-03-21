@@ -1,0 +1,203 @@
+//LIVE @ CODEPEN
+https://codepen.io/grahovsky/pen/KWoMjy
+
+// Initialize Firebase --> V3
+var config = {
+  apiKey: "AIzaSyBce7z20_LG94V7rnnzWJltHGCeFl0Sah8",
+  authDomain: "grahovsky-js-auth.firebaseapp.com",
+  databaseURL: "https://grahovsky-js-auth.firebaseio.com",
+  storageBucket: "grahovsky-js-auth.appspot.com",
+  messagingSenderId: "1092272135393"
+};
+
+firebase.initializeApp(config);
+
+var items = firebase.database().ref().child('movies');
+
+//RECORD ITEM ON FIREBASE
+function recordItem(itemInfo) {
+  
+  //console.log(itemInfo);
+  
+  items.push({
+     title: itemInfo.Title,
+     year: itemInfo.Year,
+     rated: itemInfo.Rated,
+     release: itemInfo.Released,
+     runtime: itemInfo.Runtime,
+     plot: itemInfo.Plot,
+     poster: itemInfo.Poster
+   });
+  
+};
+
+//PRINT ITEMS CUANDO CAMBIE LA DDBB
+function printItem() {
+
+  items.on("child_added",function(snapshot){
+
+    //var printName = snapshot.key();
+    var printTitle = snapshot.child("title").val();
+    var printYear = snapshot.child("year").val();
+    var printRated = snapshot.child("rated").val();
+    var printRelease = snapshot.child("release").val();
+    var printRuntime = snapshot.child("runtime").val();
+    var printPlot = snapshot.child("plot").val();
+    var printPoster = snapshot.child("poster").val();
+    
+    //HTML
+    var divContent = "<div class='ms-printRes ani-show'>";
+        divContent += "<div class='wrapperInfo'>";
+        divContent += "<h1>"+printTitle+" <span class='year'>"+printYear+"</span></h1>";
+        divContent += "<div class='extraInfo'><span class=''>"+printRated+" - </span>";
+        divContent += " <span class=''>"+printRelease+", </span>";
+        divContent += "<span class=''>"+printRuntime+"</span>";
+        divContent += "</div>";
+        divContent += "<div class='plotInfo'>"+printPlot+"</div>";
+        divContent += "</div>";
+        divContent += "<div class='posterImg'><img src="+printPoster+" width='100' /></div>";
+        divContent += "<div class='clearfix'></div>";
+        divContent += "</div>";
+
+        document.querySelector(".ms-items-list").innerHTML += divContent;
+    
+  });
+
+}
+printItem();
+
+//DELETE ITEM ON FIREBASE
+function deleteItem(itemInfo) {
+  
+   //delete
+  
+};
+
+//Check if ITEM exists
+function checkItem(itemInfo) {
+
+    var dbE = dbExists();
+  
+    if(dbE === true){
+    
+      //console.log("Check Children",dbE);
+//FALLA --> MAL EL CHECKEO DE SI YA EXISTE LA PELI      
+      items.orderByChild("title").once("child_added", function(snapshot) {
+        
+        var checkKey = snapshot.val().title;
+        console.log("Checking Key:",checkKey);
+        
+      });  
+      
+    } else {
+      
+      //console.log("Check Children",dbE);
+      recordItem(itemInfo);
+      
+    }
+  //recordItem(itemInfo);
+};
+
+//ARE THERE ITEMS ON FIREBASE?
+var hasChildren;
+function dbExists() {
+  
+    var ref = firebase.database().ref();
+    ref.once("value")
+    .then(function(snapshot) {
+      hasChildren = snapshot.child("movies").hasChildren(); // false
+      //console.log("Children",hasChildren);
+    });
+  
+    return hasChildren;
+}
+//START
+dbExists();
+
+//DELETE ALL ITEMS ON FIREBASE
+function deleteDB() {
+  
+   items.remove();
+  
+};
+//DELETE TO START PARTY
+//deleteDB();
+
+//Llamada ajax a OMDB con la variable que me han pasado como title --> "http://www.omdbapi.com/?t="+varInput
+function msAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+    
+    xmlHttp.onreadystatechange = function() {
+        
+        if (xmlHttp.readyState === 4) {
+            
+            if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
+                
+                //console.info(xmlHttp.responseText);
+                var itemInfo = JSON.parse(xmlHttp.responseText);
+                callback(itemInfo);
+                //GRABAR EN FIREBASE
+                //checkItem(itemInfo);
+
+            } else if (xmlHttp.status >= 400 && xmlHttp.status <= 600) {
+
+                console.error("ERROR! 404");
+                console.warn(JSON.parse(xmlHttp.responseText));
+
+            }
+        }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+};
+
+//Print Resultados
+function printRes(valorInput) {
+
+    //console.info("ValorInp: "+valorInput);
+
+//--> Faltaría valorInput.trim() para eliminar espacios blancos al principio y al final 
+//--> Faltaria encodeURIComponent(valorInput) para convertir el texto en URL de verdad y asegurar que no se rompe.
+  
+    msAjax("https://www.omdbapi.com/?t="+valorInput, function(itemInfo){
+      //console.log("printRes");
+      checkItem(itemInfo); 
+    });
+
+}
+
+//Recoger el valor del input cuando clicken el boton --> limpiar input al terminar
+//if empty --> mensaje error
+document.querySelector(".ms-send-query").addEventListener("click" , pickupInput);
+
+function pickupInput() {
+
+    var userSearch = document.getElementById("userSearch").value;
+
+    if(userSearch !== null && userSearch !== undefined && userSearch !== "") {
+        
+        //console.log(userSearch);
+       printRes(userSearch);
+
+    } else {console.warn("WRONG INFO FROM INPUT");}
+
+}
+
+//EVENTOS INPUT
+var msInput = document.getElementById("userSearch");
+
+msInput.addEventListener("focusin", function(){
+
+    //console.log("Focus in!");
+    msInput.value = "";
+    msInput.placeholder = "";
+
+});
+
+msInput.addEventListener("focusout", function(){
+
+    //console.log("Focus!");
+    msInput.placeholder = "New Movie";
+
+});
