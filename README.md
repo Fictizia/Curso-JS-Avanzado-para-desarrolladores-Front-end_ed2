@@ -59,7 +59,7 @@ Teoría | Recursos
 [Clase 10](teoria/clase10.md) | [Clase 10](recursos/clase10.md)
 [Clase 11](teoria/clase11.md) | [Clase 11](recursos/clase11.md)
 [Clase 12](teoria/clase12.md) | [Clase 12](recursos/clase12.md)
-Clase 13 | Clase 13
+[Clase 13](teoria/clase13.md) | [Clase 13](recursos/clase13.md)
 Clase 14 | Clase 14
 Clase 15 | Clase 15
 Clase 16 | Clase 16
