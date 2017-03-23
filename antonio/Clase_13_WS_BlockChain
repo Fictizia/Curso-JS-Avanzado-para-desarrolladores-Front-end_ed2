@@ -1,0 +1,101 @@
+//CODEPEN LIVE
+http://codepen.io/grahovsky/pen/peVgBx
+
+//TOTAL BTC Transactions
+var satoshis;
+var btcAmount;
+//1 BTC = 1000000000 satoshis
+var btcValue = 1000000000;
+
+//OPEN WS 
+var blockchainWS = new WebSocket("wss://ws.blockchain.info/inv");
+
+//WS connection error
+blockchainWS.onerror = function(error) {
+  console.log('connection.onerror', error);
+};
+
+//SUBSCRIBING TO WS
+blockchainWS.onopen = function() {
+  
+  satoshis = 0;
+  //	subscribe to uncofirmed activity
+  blockchainWS.send(JSON.stringify({"op": "unconfirmed_sub"})); 
+  //	subscribe to new blocks
+  blockchainWS.send(JSON.stringify({"op": "blocks_sub"}));
+  //Keep Alive --> Falta Interval cada 30s
+  //blockchainWS.send(JSON.stringify({"op":"ping"}));
+  
+};
+
+blockchainWS.onmessage = function(infoReceived) { 
+  //console.log( "Received Message: ", infoReceive.data);
+  var opType = (JSON.parse(infoReceived.data));
+  //console.log( "Received Op: ", opType);
+  if(opType.op === "utx"){
+      //console.info("UTX!");
+      satoshis += opType.x.out[0].value;
+      btcAmount = satoshis/btcValue;
+      document.querySelector("#btcTrans h1").innerHTML = btcAmount;
+      //MONEY CONVERTER
+      showExchange(exchangeInfo);
+  } else {
+     console.warn("NO UTX");
+  }
+  //Close WS after 1st call for playing --> Quit for Real Time Info
+  //this.close();
+};
+
+//CAMBIAR A MONEDAS REALES
+//url API Para conseguir valores --> 
+var ajaxURL = "https://blockchain.info/es/ticker";
+var exchangeInfo;
+
+function msAjax(url,callback) {
+
+    var xmlHttp = new XMLHttpRequest();
+    
+    xmlHttp.onreadystatechange = function() {
+        
+        if (xmlHttp.readyState === 4) {
+            
+            if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
+                
+                //console.info(xmlHttp.responseText);
+                var itemInfo = JSON.parse(xmlHttp.responseText);
+                exchangeInfo = itemInfo;
+                //callback(exchangeInfo);
+
+            } else if (xmlHttp.status >= 400 && xmlHttp.status <= 600) {
+
+                console.warn(JSON.parse(xmlHttp.responseText));
+
+            }
+        }
+    };
+    xmlHttp.open("GET", url+"?cors=true", true);
+    xmlHttp.send();
+};
+
+msAjax(ajaxURL);
+
+function showExchange(exchangeInfo) {
+
+  //console.info(exchangeInfo);
+  document.querySelector("#btcSell").innerHTML = "";
+  document.querySelector("#btcBuy").innerHTML = "";
+  
+  for(var item in exchangeInfo) {
+    
+     //console.warn("Moneda:",item, exchangeInfo[item].buy, exchangeInfo[item].sell, exchangeInfo[item].symbol);
+    var selling = "<strong>"+item+"</strong> "+exchangeInfo[item].sell+" "+exchangeInfo[item].symbol;
+    //1 BTC bought for (exchangeInfo[item].buy);
+    var btcBought = btcAmount*(exchangeInfo[item].buy);
+    var buying = "<strong>"+item+"</strong> "+btcBought.toFixed(4)+" "+exchangeInfo[item].symbol;
+    
+    document.querySelector("#btcSell").innerHTML += "<span>"+selling+"</span>";
+    document.querySelector("#btcBuy").innerHTML += "<span>"+buying+"</span>";
+    
+  } 
+  
+};
