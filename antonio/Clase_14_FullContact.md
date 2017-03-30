@@ -23,6 +23,7 @@ var queryID = firebase.database().ref().child('querySearch');
 function deleteDB() {
   items.remove();
   queryID.remove();
+  document.querySelector(".error").innerHTML = "All items deleted."
 };
 document.querySelector(".delete").addEventListener("click" , deleteDB);
 //DELETE TO START THE PARTY
@@ -89,7 +90,7 @@ function buildURL(mail) {
   var urlAPI = "https://api.fullcontact.com/v2/person.json?apiKey="+apiKey+"&email="+mail;
   //AJAX CALL
   //console.log("Search input:",usermail);
-  msAjax(urlAPI);
+  msAjax(urlAPI,saveUser);
 }
 
 function msAjax(url,callback) {
@@ -103,7 +104,8 @@ function msAjax(url,callback) {
             if (xmlHttp.status >= 100 && xmlHttp.status <= 399) {
                 
                 var itemInfo = JSON.parse(xmlHttp.responseText);
-                saveUser(itemInfo);
+                //saveUser(itemInfo);
+                callback(itemInfo);
                 console.log(itemInfo);
 
             } else if (xmlHttp.status >= 400 && xmlHttp.status <= 600) {
@@ -144,6 +146,8 @@ function saveUser(itemInfo) {
     //id = text from input
     id: usermail 
   });
+  
+  document.querySelector(".error").innerHTML = "El usuario con email "+usermail+" ha sido guardado."
   
 }
 
