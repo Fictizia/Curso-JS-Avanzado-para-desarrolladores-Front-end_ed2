@@ -179,7 +179,8 @@ miCajero.Print = function(status,user,saldo,msgType){
   
 };
 /* - - - - - - - - - - - - - - END PRINT RESULTS - - - - - - -  - - - - - - - - - - - */
-
+```
+```javascript
 //INIT PRINT ONLOAD
 miCajero.Print("ON",miCajero.info.user,miCajero.info.saldo,"load");
 //END INIT PRINT ONLOAD
