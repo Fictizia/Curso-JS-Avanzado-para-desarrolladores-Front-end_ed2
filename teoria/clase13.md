@@ -436,7 +436,4 @@ function runEveryXSeconds() {
 
 ![](https://i.giphy.com/3ohze2apsm6Qpb281y.gif)
 
-**Solución**
-```javascript
-	// Tu solución
-```
+**[Solucion](http://codepen.io/ulisesgascon/pen/a2fa70314c582074d8b843f2a356c9ce?editors=1010)**
