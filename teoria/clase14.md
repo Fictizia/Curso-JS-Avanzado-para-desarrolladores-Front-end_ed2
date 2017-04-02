@@ -637,6 +637,6 @@ nuevoCoche.detalles();
 - Documentación:
   - [FullContact by Email](https://www.fullcontact.com/developer/docs/email/)
 
-```javascript
-	// Tu solución
-```
+**Solución:**
+- [Firebase 2.x](http://codepen.io/ulisesgascon/pen/b3362ecbd9fc9e393453c6fdd7e92ea9)
+- [Firebase 3.x](http://codepen.io/ulisesgascon/pen/6c92c9c1b10047c072e6af6a47a54669)
