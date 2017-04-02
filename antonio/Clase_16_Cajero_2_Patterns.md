@@ -175,12 +175,11 @@ miCajero.Print = function(status,user,saldo,msgType){
   //Info 2 print
   var info2print =  "<br>"+_operationID+" - New Info:<br>>> Cajero: "+status+" · "+user+" · Saldo en cajero: "+saldo+_currency+"<br></span>";
   
-  document.querySelector(".result").innerHTML += "<span class='msg"+msgType+""'>"+info2print;
+  document.querySelector(".result").innerHTML += "<span class='msg"+msgType+"'>"+info2print;
   
 };
 /* - - - - - - - - - - - - - - END PRINT RESULTS - - - - - - -  - - - - - - - - - - - */
-```
-```javascript
+
 //INIT PRINT ONLOAD
 miCajero.Print("ON",miCajero.info.user,miCajero.info.saldo,"load");
 //END INIT PRINT ONLOAD
