@@ -70,11 +70,12 @@ miCajero.updateSaldo = function(newValue){
 miCajero.Input = function(operation){
   
   //console.info("input",operation);
-  var inputValue = parseInt(document.getElementById("moneyInput").value);
+  var inputValue = document.getElementById("moneyInput").value;
   
   if(inputValue !== null && inputValue !== undefined && inputValue !== ""){
     
     var opResult;
+    inputValue = parseInt(inputValue);
     
     if(operation === "add"){
       
@@ -175,7 +176,7 @@ miCajero.Print = function(status,user,saldo,msgType){
   //Info 2 print
   var info2print =  "<br>"+_operationID+" - New Info:<br>>> Cajero: "+status+" · "+user+" · Saldo en cajero: "+saldo+_currency+"<br></span>";
   
-  document.querySelector(".result").innerHTML += "<span class='msg"+msgType+"'>"+info2print;
+  document.querySelector(".result").innerHTML += "<span class='msg "+msgType+"'>"+info2print;
   
 };
 /* - - - - - - - - - - - - - - END PRINT RESULTS - - - - - - -  - - - - - - - - - - - */
