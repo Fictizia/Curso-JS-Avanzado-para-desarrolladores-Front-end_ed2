@@ -1,6 +1,6 @@
 ## 1 - Captura los emails del siguiente texto.
 ```javascript
-
+// regEX --> wip --> ^(?=.*\w)([0-9a-zA-Z]*[@#$%][0-9a-zA-Z]*[.])$
 ```
 
 ## 2 - Captura el DNI y NIE
