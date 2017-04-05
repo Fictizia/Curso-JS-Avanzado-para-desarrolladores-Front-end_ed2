@@ -11,11 +11,12 @@
 // regEX --> \d{8}[-]?[A-Z]
 
 (function(){
-	var cadena = [];
-      cadena[0] = "12345678-A";
-      cadena[1] = "11223344A";
-      cadena[2] = "A11223344";
-      cadena[3] = "1234567K";
+
+var cadena = [];
+cadena[0] = "12345678-A";
+cadena[1] = "11223344A";
+cadena[2] = "A11223344";
+cadena[3] = "1234567K";
 
   var l = cadena.length;
 
@@ -41,12 +42,13 @@
 // regEX --> ([A-Z])([-]?)(\d{7})([-]?)([A-Z])
 
 (function(){
-	var cadena = [];
-      cadena[0] = "X-1234567-A";
-      cadena[1] = "X1234567A";
-      cadena[2] = "Z1234567M";
-      cadena[3] = "X-1233456";
-	    cadena[4] = "1234567";
+
+var cadena = [];
+cadena[0] = "X-1234567-A";
+cadena[1] = "X1234567A";
+cadena[2] = "Z1234567M";
+cadena[3] = "X-1233456";
+cadena[4] = "1234567";
 
   var l = cadena.length;
 
