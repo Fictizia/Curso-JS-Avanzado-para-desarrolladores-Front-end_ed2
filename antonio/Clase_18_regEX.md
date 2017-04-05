@@ -59,6 +59,14 @@ cadena[4] = "1234567";
 
 	}
 }());
+
+//Results on console
+// X-1234567-A cumple true
+// X1234567A cumple true
+// Z1234567M cumple true
+// X-1233456 cumple false
+// 1234567 cumple false
+
 ```
 
 ## 3 - Comprobar la seguridad de una contraseña
