@@ -23,16 +23,16 @@ cadena[3] = "1234567K";
 	for(var i=0;i<l;i++){
 
 		var regEX = /\d{8}[-]?[A-Z]/.test(cadena[i]);
-		console.log(cadena[i]+" cumple "+regEX);
+		console.log(cadena[i]+" is "+regEX);
 
 	}
 }());
 
 //Results on console
-// 12345678-A cumple true
-// 11223344A cumple true
-// A11223344 cumple false
-// 1234567K cumple false
+// 12345678-A is true
+// 11223344A is true
+// A11223344 is false
+// 1234567K is false
 
 ```
 
@@ -55,21 +55,49 @@ cadena[4] = "1234567";
 	for(var i=0;i<l;i++){
 
 		var regEX = /([A-Z])([-]?)(\d{7})([-]?)([A-Z])/.test(cadena[i]);
-		console.log(cadena[i]+" cumple "+regEX);
+		console.log(cadena[i]+" is "+regEX);
 
 	}
 }());
 
 //Results on console
-// X-1234567-A cumple true
-// X1234567A cumple true
-// Z1234567M cumple true
-// X-1233456 cumple false
-// 1234567 cumple false
+// X-1234567-A is true
+// X1234567A is true
+// Z1234567M is true
+// X-1233456 is false
+// 1234567 is false
 
 ```
 
 ## 3 - Comprobar la seguridad de una contraseña
 ```javascript
+
+// regEX --> ((?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%])(?!.*[#&]).{6,20})
+// ?=.* --> positive look ahead
+// ?!.* --> negative look ahead
+
+(function(){
+
+var pass = [];
+pass[0] = "123c4A90a%";
+pass[1] = "ada34d&sba";
+pass[2] = "s#asdAr";
+pass[3] = "1234549987a";
+
+  var l = pass.length;
+
+	for(var i=0;i<l;i++){
+
+		var regEX = /((?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%])(?!.*[#&]).{6,20})/.test(pass[i]);
+		console.log(pass[i]+" is "+regEX);
+
+	}
+}());
+
+//Results on console
+// 123c4A90a% is true
+// ada34d&sba is false
+// s#asdAr is false
+// 1234549987a is false
 
 ```
