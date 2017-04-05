@@ -1,5 +1,5 @@
 
-Validacion de email:
+Validacion de email: 
 /^[_a-z0-9-]+((.[_a-z0-9-]+)*)+[a-z0-9]@[a-z0-9]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test("demo@novalido.com");
 
 Validacion email:
