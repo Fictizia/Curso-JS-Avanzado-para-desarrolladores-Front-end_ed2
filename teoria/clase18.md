@@ -441,9 +441,7 @@ var validas = test.match(exp);
 
 **4 -** Incorpora el patron *Chain of responsability* al cajero automatico para indicar los billetes y monedas facilitadas por la maquina cuando se retira efectivo
 
-```javascript
-    // Tu solución
-```
+- [Solución](http://codepen.io/ulisesgascon/pen/91487e2ccdab7a1064516e3693547733)
 
 **5 -** Refactoriza la aplicación de las películas:
 - Objetivos:
