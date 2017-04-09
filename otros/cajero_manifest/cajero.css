@@ -1,0 +1,20 @@
+ #contenedor {
+    width: 700px;
+}
+        
+#nav-options{
+    margin-top:20px;
+    margin-bottom:15px;
+}
+        
+.gbotones {
+    margin-bottom: 15px;
+}
+        
+.input-group {
+    margin-bottom: 5px;
+}
+        
+.badge-info {
+    background-color: #5bc0de;
+}

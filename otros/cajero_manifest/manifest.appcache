@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# versión 0.0.1
+
+CACHE:
+index.html
+cajero.css 
+cajero.js
+
+NETWORK:
+*
