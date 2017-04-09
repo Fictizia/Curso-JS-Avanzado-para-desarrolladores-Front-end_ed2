@@ -391,7 +391,21 @@ No válidos: X-1233456, 1234567
 ```
 
 ```javascript
-// Tu solución
+var NIE = /([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1})/g;
+var DNI = /(\d{8})([-]?)([A-Z]{1})/g;
+var todosRegex = /(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))/g;
+
+var dniText = "Válidos: 12345678-A, 11223344A. No válidos: A11223344, 1234567K."
+var nieText = "Válidos: X-1234567-A, X1234567A, Z1234567M. No válidos: X-1233456, 1234567."
+var todosTexto = dniText + nieText
+
+var DNIs = dniText.match(DNI);
+var NIEs = nieText.match(NIE);
+var todos = todosTexto.match(todosRegex)
+
+console.log("Solo DNIs:", DNIs); // ["12345678-A", "11223344A"]
+console.log("Solo NIEs:", NIEs); // ["X-1234567-A", "X1234567A", "Z1234567M"]
+console.log("TODOS:", todos); // ["12345678-A", "11223344A", "X-1234567-A", "X1234567A", "Z1234567M"]
 ```
 
 **3 -** Comprobar la seguridad de una contraseña
