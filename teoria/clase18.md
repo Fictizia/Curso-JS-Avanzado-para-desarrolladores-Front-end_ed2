@@ -419,7 +419,23 @@ De esta forma comprobaremos:
 - Contraseñas cuya longitud máxima sea 20 caracteres.
 
 ```javascript
-// Tu solución
+var test = `Válidas:
+Z%C2Uacgw_4weL@Q
+QZ6UttU-&r4t%R+J
+KK8a%K^9seQ$Qc8X
+*Q#*9-CP%?JkXQSs
+#1234abCD@
+
+No válidas:
+?mT6JmKpTu6m_=g=
+=G4T!v-J2_6aS^EW
+perrito
+perrito123
+Perrito1234`;
+
+var exp = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/gm;
+var validas = test.match(exp);
+// ["Z%C2Uacgw_4weL@Q", "QZ6UttU-&r4t%R+J", "KK8a%K^9seQ$Qc8X", "*Q#*9-CP%?JkXQSs", "#1234abCD@"]
 ```
 
 
