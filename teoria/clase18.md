@@ -367,7 +367,10 @@ demo@demo.com, demo_demo@demo.com.ar, demo-demo12312@sub.dom.com.ar, demo@novali
 ```
 
 ```javascript
-// Tu solución
+var email = /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+var emails = "demo@demo.com, demo_demo@demo.com.ar, demo-demo12312@sub.dom.com.ar, ,demo@novalido, novalido>@demo.com, demo@novalido-.com, demo@-novalido.com".match(email);
+console.log(emails);
+// ["demo@demo.com", "demo_demo@demo.com.ar", "demo-demo12312@sub.dom.com.ar"]
 ```
 
 
