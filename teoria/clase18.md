@@ -449,6 +449,4 @@ var validas = test.match(exp);
   - Controlar la interacción con eventos
   - Estructurar el código de una manera eficiente
 
-```javascript
-    // Tu solución
-```
+- [Solución](http://codepen.io/ulisesgascon/pen/48b774d3d0ffefe1bfb079f79bc8686a/)
