@@ -67,7 +67,7 @@ Teoría | Recursos
 [Clase 18](teoria/clase18.md) | [Clase 18](recursos/clase18.md)
 [Clase 19](teoria/clase19.md) | [Clase 19](recursos/clase19.md)
 [Clase 20](teoria/clase20.md) | [Clase 20](recursos/clase20.md)
-Clase 21 | Clase 21
+[Clase 21](teoria/clase21.md) | [Clase 21](recursos/clase21.md)
 Clase 22 | Clase 22
 Clase 23 | Clase 23
 Clase 24 | Clase 24
