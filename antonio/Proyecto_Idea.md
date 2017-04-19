@@ -1,12 +1,12 @@
-###Proyecto: Alien or Human?
+### Proyecto: Alien or Human?
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-####Objetivo_
+#### Objetivo_
 
 Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respuesta (Acción / reacción)
 
-####Desc_
+#### Desc_
 
 · Ceros o Unos. True or False.
 · Mostramos imagen y una palabra asociada. El usuario debe decidir si es cierto o falso. “Si” o “No”. —> Tinder
@@ -20,9 +20,9 @@ Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respues
 	—> etc…	
 	—> Versión Beta con Aliens y Humanos.
 
-####Mecánica Básica_
+#### Mecánica Básica_
 
-#####1 - Contra la máquina / General.
+##### 1 - Contra la máquina / General.
 
 · 10 imágenes de Aliens y Humanos (5+5).
 
@@ -38,7 +38,7 @@ Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respues
 
 	Partida = Número total de jugadas en 30segundos
 
-#####2 - Ranking.
+##### 2 - Ranking.
 
 	> Nivel del Jugador —> 5 niveles? —> 0 > 20 > 40 > 60 > 80 > 90 > 100% ??
 
@@ -48,7 +48,7 @@ Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respues
 
 		> + Datos > País / Ciudad
 
-#####3 - Modo batalla.
+##### 3 - Modo batalla.
 
 · 2 usuarios juegan la misma partida.
 · Gana el que más aciertos tenga.
@@ -63,7 +63,7 @@ Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respues
 
 	> Permitir apuestas de puntos entre los demás usuarios?
 
-#####4 - Necesidades 
+##### 4 - Necesidades 
 
 · App híbrida para Jugar + ranking / crear usuarios
 · Landing —> Web para ranking / downloads / crear usuarios
@@ -71,7 +71,7 @@ Juego de mecánica lo más sencilla posible —> Boolean = Pregunta —> Respues
 	· login —> facebook 
 	· login —> normal
 
-#####5 - XTras / Ideas
+##### 5 - XTras / Ideas
 · Permitir comentarios de otros usuarios?
 · Seguir a otros usuarios?
 · Notificaciones? —> De qué?
