@@ -70,8 +70,9 @@ Teoría | Recursos
 [Clase 21](teoria/clase21.md) | [Clase 21](recursos/clase21.md)
 [Clase 22](teoria/clase22.md) | [Clase 22](recursos/clase22.md)
 [Clase 23](teoria/clase23.md) | [Clase 23](recursos/clase23.md)
-Clase 24 | Clase 24
+[Clase 24](teoria/clase24.md) | [Clase 24](recursos/clase24.md)
 
+**[Extras](teoria/extras.md)**
 
 Temario
 =================
